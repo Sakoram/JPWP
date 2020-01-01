@@ -10,7 +10,7 @@ import stronghold.Handler;
 
 public abstract class Entity {
 
-	public static final int DEFAULT_HEALTH = 10;
+	//public static final int DEFAULT_HEALTH = 10;
 	protected static Handler handler;
 	protected float x;
 	protected float y;
@@ -20,13 +20,13 @@ public abstract class Entity {
 	protected Rectangle bounds;
 	protected boolean isSelected = false;
 	
-	public Entity(Handler handler, float x, float y, int width, int height){
+	public Entity(Handler handler, float x, float y, int width, int height, int health){
 		Entity.handler = handler;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		health = DEFAULT_HEALTH;
+		this.health = health;
 		
 		bounds = new Rectangle(0, 0, width, height);
 	}

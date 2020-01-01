@@ -5,8 +5,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
-
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 import stronghold.Handler;
 import stronghold.entities.creatures.Player;
@@ -22,9 +23,9 @@ public class EntityManager {
 	/*private Comparator<Entity> renderSorter = new Comparator<Entity>(){
 		@Override
 		public int compare(Entity a, Entity b) {
-			if(a.getY() + a.getHeight() < b.getY() + b.getHeight())
-				return -1;
-			return 1;
+			if(a instanceof Unit)
+				return 1;
+			return -1;
 		}
 	};*/
 	
@@ -48,7 +49,10 @@ public class EntityManager {
 	
 	public void render(Graphics g){
 		for(Entity e : entities){
-			e.render(g);
+			if(!(e instanceof Unit)) e.render(g);
+		}
+		for(Entity e : entities){
+			if(e instanceof Unit) e.render(g);
 		}
 		Rectangle selection = handler.getMouseManager().getSelection();
 		if(selection != null) {
@@ -104,10 +108,20 @@ public class EntityManager {
 	public void MoveUnits(Point dest) {
 		dest.x+=handler.getGameCamera().getxOffset();
 		dest.y+=handler.getGameCamera().getyOffset();
+		List<Entity> unitsToMove = new ArrayList<Entity>();
 		for(Entity e : entities){
 			if(e instanceof Unit && e.isSelected)
-				((Unit)e).setPath(pathFinding.FindPath(new Point( (int)e.getX(), (int)e.getY() ), dest));
+				unitsToMove.add(e);
 		}
+		List<Point> locations = pathFinding.findLocations(dest,unitsToMove.size());
+		if(locations==null) return;
+		int i=0;
+		for(Entity unit : unitsToMove)
+		{
+			((Unit)unit).setPath(pathFinding.findPath(new Point( (int)unit.getX(), (int)unit.getY() ), locations.get(i)));
+			if(i+1<locations.size()) i++;
+		}
+		
 		
 	}
 

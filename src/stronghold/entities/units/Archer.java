@@ -8,9 +8,9 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Archer extends Unit {
-
+	public static final int DEFAULT_HEALTH = 300;
 	public Archer(Handler handler, float x, float y) {
-		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH);
 		this.speed = 10;
 		// TODO Auto-generated constructor stub
 	}

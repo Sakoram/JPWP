@@ -5,9 +5,12 @@ import java.awt.Rectangle;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+import javax.vecmath.Tuple2d;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
+import stronghold.tiles.Tile;
 
 public abstract class Unit extends Entity {
 	protected List<Point> path;
@@ -15,8 +18,9 @@ public abstract class Unit extends Entity {
 	protected Point destination;
 	protected int speed;
 	protected Point a;
-	public Unit(Handler handler, float x, float y, int width, int height){
-		super(handler, x, y, width, height);
+	public Unit(Handler handler, float x, float y, int width, int height, int health){
+		super(handler, x*Tile.TILEWIDTH, y*Tile.TILEHEIGHT, width, height, health);
+		this.speed = 5;	// default
 	}
 
 
@@ -30,19 +34,36 @@ public void select(Rectangle selection) {
 	
 }
 public void setPath(List<Point> path) {
-	this.path = path;
-	this.pathIterator = this.path.iterator();
+	if(path!=null) {
+		this.path = path;
+		this.pathIterator = this.path.iterator();
+	}
+
 }
-private void move(Point dest) {
-	//dest.sub(new Point(x,y));
-	//dest.normalize();
-	//dest.scale(speed);
+private boolean moveToDest(Point dest) {
+	Vector2d temp = new Vector2d(dest.getX(),dest.getY());
+	temp.sub(new Vector2d(x,y));
+	if(temp.length() <= speed) {
+		this.x = dest.x;
+		this.y = dest.y;
+		return true;
+	}
+	temp.normalize();
+	temp.scale(speed);
+	this.x+=temp.x;
+	this.y+=temp.y;
+	return false;
 }
 @Override
 public void tick() {
-	move(new Point(30,30));
-	//if(pathIterator.hasNext())
-		//pathIterator.next()
+	
+	if(pathIterator!=null && pathIterator.hasNext())
+	{
+		if( destination == null || moveToDest(destination) )  destination = pathIterator.next();
+	} else {
+		if( destination == null || moveToDest(destination) ) destination = null;
+	}
+		
 		//this.x
 
 }

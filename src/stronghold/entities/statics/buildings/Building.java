@@ -3,13 +3,13 @@ package stronghold.entities.statics.buildings;
 import java.awt.Rectangle;
 
 import stronghold.Handler;
-import stronghold.entities.statics.StaticEntity;
+import stronghold.entities.Entity;
 import stronghold.tiles.Tile;
 
-public abstract class Building extends StaticEntity {
+public abstract class Building extends Entity {
 
-	public Building(Handler handler, float x, float y, int width, int height) {
-		super(handler, x, y, width, height);
+	public Building(Handler handler, float x, float y, int width, int height, int health) {
+		super(handler, x*Tile.TILEWIDTH, y*Tile.TILEHEIGHT, width, height,health);
 		// TODO Auto-generated constructor stub
 	}
 

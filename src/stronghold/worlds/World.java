@@ -17,8 +17,6 @@ import stronghold.utils.Utils;
 
 
 public class World {
-
-	private PathFinding pathFinding;
 	
 	private Handler handler;
 	private int width, height;
@@ -37,27 +35,28 @@ public class World {
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
 		handler.getMouseManager().setEntityManager(entityManager);
 		// Temporary entity code!
-		entityManager.addEntity(new Tree(handler, 100, 250));
+		entityManager.addEntity(new Tree(handler, 2, 2));
 		//entityManager.addEntity(new Knight(handler, 150, 500));
-		entityManager.addEntity(new Gimli(handler, 250, 500));
-		entityManager.addEntity(new Archer(handler, 350, 500));
-		entityManager.addEntity(new Worker(handler, 450, 500));
-		entityManager.addEntity(new Spearman(handler, 550, 500));
-		entityManager.addEntity(new King(handler, 650, 500));
+		entityManager.addEntity(new Gimli(handler, 5, 2));
+		entityManager.addEntity(new Archer(handler, 5, 3));
+		entityManager.addEntity(new Worker(handler, 5, 4));
+		entityManager.addEntity(new Spearman(handler, 6, 2));
+		entityManager.addEntity(new King(handler, 6, 3));
 		for(int i=3;i<9;i++) {
 			entityManager.addEntity(new Wall(handler, i, 3));
+			entityManager.addEntity(new Worker(handler, i, 8));
+			entityManager.addEntity(new Worker(handler, 8, i));
 			entityManager.addEntity(new Wall(handler, 8, i));
 		}
 		entityManager.addEntity(new Stairs(handler, 4, 4));
+		entityManager.addEntity(new Gate(handler, 7, 10,true));
+		entityManager.addEntity(new Tower(handler, 10, 10));
 		
-		
+		System.out.print(new Wall(handler, 20, 20).getHealth());
 		
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
 		
-		pathFinding = new PathFinding(handler);
-		List<Point> list = pathFinding.FindPath(new Point(2,2), new Point(5,31));
-		System.out.println("lista: " + list);
 	}
 	public void tick(){
 		handler.getGameCamera().adjustGameCamera();

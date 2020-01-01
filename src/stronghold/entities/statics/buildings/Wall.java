@@ -8,8 +8,9 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Wall extends Building {
+	public static final int DEFAULT_HEALTH = 100;
 	public Wall(Handler handler, int x, int y) {
-		super(handler, x*Tile.TILEWIDTH, y*Tile.TILEHEIGHT, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH);
 		handler.getWorld().setGridNodeEntranceLv(x, y, 3);
 		
 	}

@@ -5,13 +5,14 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import stronghold.Handler;
+import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
-public class Tree extends StaticEntity {
-
+public class Tree extends Entity {
+	public static final int DEFAULT_HEALTH = 50;
 	public Tree(Handler handler, float x, float y) {
-		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH);
 		
 		bounds.x = Tile.TILEWIDTH/4;
 		bounds.y = Tile.TILEHEIGHT/4;
