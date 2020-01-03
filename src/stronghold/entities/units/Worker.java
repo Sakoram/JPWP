@@ -9,6 +9,7 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Worker extends Unit {
+	
 	public static final int DEFAULT_HEALTH = 100;
 	public static final int RANGE = 0;
 	public Worker(Handler handler, float x, float y, boolean isPlayers) {
@@ -26,17 +27,16 @@ public class Worker extends Unit {
 
 	}
 
-	@Override
-	public void die() {
-		// TODO Auto-generated method stub
-
-	}
-
 
 
 	@Override
 	public void atack(Entity enemy) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void tick() {
+		super.tick(0);
 		
 	}
 

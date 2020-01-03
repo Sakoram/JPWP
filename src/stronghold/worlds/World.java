@@ -37,7 +37,7 @@ public class World {
 		handler.getMouseManager().setEntityManager(entityManager);
 		// Temporary entity code!
 		entityManager.addEntity(new Tree(handler, 2, 2));
-		entityManager.addEntity(new Arrow(handler, 3, 2));
+		//entityManager.addEntity(new Arrow(handler, 3, 2));
 		//entityManager.addEntity(new Knight(handler, 150, 500));
 		entityManager.addEntity(new Gimli(handler, 5, 2,true));
 		entityManager.addEntity(new Archer(handler, 5, 3,true));
@@ -45,7 +45,7 @@ public class World {
 		entityManager.addEntity(new Spearman(handler, 6, 2,true));
 		entityManager.addEntity(new King(handler, 6, 3,true));
 		entityManager.addEntity(new Knight(handler, 9, 9,true));
-		entityManager.addEntity(new Knight(handler, 12, 12,false));
+		entityManager.addEntity(new King(handler, 12, 12,false));
 		for(int i=3;i<9;i++) {
 			entityManager.addEntity(new Wall(handler, i, 3));
 			entityManager.addEntity(new Worker(handler, i, 8,true));

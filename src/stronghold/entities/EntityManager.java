@@ -127,6 +127,16 @@ public class EntityManager {
 		
 	}
 	public void damageUnits(int damage, Rectangle area, boolean isDmgFromPlayersUnit){
+		for(Entity e : entities){
+			if(!(e instanceof Unit)) continue;
+			if(((Unit)e).getIsPlayers() == isDmgFromPlayersUnit) continue;
+			Rectangle UnitArea = new Rectangle((int)e.getX(),(int)e.getY(),e.getWidth(),e.getHeight());
+			if(UnitArea.intersects(area)) {
+				e.hurt(damage);
+				return;
+			}
+		}
+		
 		
 	}
 	//public boolean toprint= true;
@@ -154,7 +164,7 @@ public class EntityManager {
 				int attackerX = (int)((attacker.getX()+attacker.getWidth()/2)/Tile.TILEWIDTH);
 				int attackerY = (int)((attacker.getY()+attacker.getHeight()/2)/Tile.TILEHEIGHT);
 				if((!(attacker instanceof Archer)) && 
-						((grid[eY][eX].getEntrenceLv() 
+						(Math.abs(grid[eY][eX].getEntrenceLv() 
 								- grid[attackerX][attackerY].getEntrenceLv()) > 1 )) continue;
 					
 				return (Unit)e;

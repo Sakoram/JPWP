@@ -2,6 +2,7 @@ package stronghold.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import javax.vecmath.Vector2d;
@@ -35,16 +36,31 @@ public abstract class Entity {
 	
 	public abstract void render(Graphics g);
 	
-	public abstract void die();
+	public void die() {
+		active=false;
+	}
 	
 	public abstract void select(Rectangle selection);
 	
 	public void hurt(int amt){
 		health -= amt;
 		if(health <= 0){
-			active = false;
 			die();
 		}
+	}
+	protected boolean moveToDest(Point dest, int speed) {
+		Vector2d temp = new Vector2d(dest.getX(),dest.getY());
+		temp.sub(new Vector2d(x,y));
+		if(temp.length() <= speed) {
+			this.x = dest.x;
+			this.y = dest.y;
+			return true;
+		}
+		temp.normalize();
+		temp.scale(speed);
+		this.x+=temp.x;
+		this.y+=temp.y;
+		return false;
 	}
 	
 	public boolean checkEntityCollisions(float xOffset, float yOffset){

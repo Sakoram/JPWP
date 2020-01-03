@@ -5,12 +5,15 @@ import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
+import stronghold.entities.objects.Arrow;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Archer extends Unit {
-	public static final int RANGE = 10;
+	private static final int TICKS_TO_ATTACK = (int) (handler.getGame().getFPS()*1.5);
+	public static final int RANGE = 8;
 	public static final int DEFAULT_HEALTH = 300;
+	
 	public Archer(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
 		this.speed = 10;
@@ -21,25 +24,23 @@ public class Archer extends Unit {
 
 	@Override
 	public void render(Graphics g) {
-		if(this.isSelected) 
-			drawHP(g,health,DEFAULT_HEALTH,isPlayers);
+		super.render(g, Assets.bow, DEFAULT_HEALTH);
+		//if(this.isSelected) 
+		//	drawHP(g,health,DEFAULT_HEALTH,isPlayers);
 		
-		g.drawImage(Assets.bow, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		//g.drawImage(Assets.bow, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 		
-	}
-
-	@Override
-	public void die() {
-		// TODO Auto-generated method stub
-
 	}
 
 
 
 	@Override
 	public void atack(Entity enemy) {
-		// TODO Auto-generated method stub
-		
+		handler.getWorld().getEntityManager().addEntity(new Arrow(handler, x ,y, enemy.getX(), enemy.getY(), isPlayers));
+	}
+	@Override
+	public void tick() {
+		super.tick(TICKS_TO_ATTACK);
 	}
 
 }

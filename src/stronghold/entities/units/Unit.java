@@ -1,7 +1,9 @@
 package stronghold.entities.units;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,10 +12,11 @@ import javax.vecmath.Tuple2d;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
+import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public abstract class Unit extends Entity {
-	public static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
+	
 	protected int ticksToAttack;
 	protected boolean isPlayers;
 	protected List<Point> path;
@@ -45,22 +48,16 @@ public abstract class Unit extends Entity {
 		}
 	
 	}
-	private boolean moveToDest(Point dest) {
-		Vector2d temp = new Vector2d(dest.getX(),dest.getY());
-		temp.sub(new Vector2d(x,y));
-		if(temp.length() <= speed) {
-			this.x = dest.x;
-			this.y = dest.y;
-			return true;
-		}
-		temp.normalize();
-		temp.scale(speed);
-		this.x+=temp.x;
-		this.y+=temp.y;
-		return false;
+
+	public void render(Graphics g, BufferedImage texture, int DEFAULT_HEALTH) {
+		if(this.isSelected) 
+			drawHP(g,health,DEFAULT_HEALTH,isPlayers);
+		
+		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
-	@Override
-	public void tick() {
+
+	//@Override
+	public void tick(int TICKS_TO_ATTACK) {
 		ticksToAttack++;
 		if(ticksToAttack >TICKS_TO_ATTACK && active) {
 			ticksToAttack=0;
@@ -74,9 +71,9 @@ public abstract class Unit extends Entity {
 		}
 		if(pathIterator!=null && pathIterator.hasNext())
 		{
-			if( destination == null || moveToDest(destination) )  destination = pathIterator.next();
+			if( destination == null || moveToDest(destination,speed) )  destination = pathIterator.next();
 		} else {
-			if( destination == null || moveToDest(destination) ) destination = null;
+			if( destination == null || moveToDest(destination,speed) ) destination = null;
 		}
 			
 			//this.x

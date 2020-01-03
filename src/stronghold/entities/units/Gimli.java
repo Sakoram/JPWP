@@ -9,6 +9,7 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Gimli extends Unit {
+	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
 	public static final int DEFAULT_HEALTH = 900;
 	public static final int RANGE = 1;
 	public Gimli(Handler handler, float x, float y, boolean isPlayers) {
@@ -26,17 +27,17 @@ public class Gimli extends Unit {
 
 	}
 
-	@Override
-	public void die() {
-		// TODO Auto-generated method stub
-
-	}
 
 
 
 	@Override
 	public void atack(Entity enemy) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void tick() {
+		super.tick(TICKS_TO_ATTACK);
 		
 	}
 
