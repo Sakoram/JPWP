@@ -67,6 +67,13 @@ public abstract class Entity {
 			(int) (y + bounds.y - handler.getGameCamera().getyOffset()),
 			bounds.width, bounds.height);
 	}
+	public void drawHP(Graphics g, int currentHP, int maxHP, boolean isPlayer) {
+		if(isPlayer) g.setColor(Color.green);
+		else g.setColor(Color.red);
+		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+				(int) (y + bounds.y - handler.getGameCamera().getyOffset())-bounds.height/16,
+				bounds.width*currentHP/maxHP, bounds.height/16);
+	}
 
 	public float getX() {
 		return x;

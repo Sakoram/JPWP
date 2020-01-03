@@ -11,8 +11,10 @@ import java.util.List;
 
 import stronghold.Handler;
 import stronghold.entities.creatures.Player;
+import stronghold.entities.units.Archer;
 import stronghold.entities.units.PathFinding;
 import stronghold.entities.units.Unit;
+import stronghold.tiles.Tile;
 
 public class EntityManager {
 	
@@ -40,9 +42,9 @@ public class EntityManager {
 	public void tick(){
 		for(int i = 0;i < entities.size();i++){
 			Entity e = entities.get(i);
-			e.tick();
 			if(!e.isActive())
 				entities.remove(e);
+			e.tick();
 		}
 		//entities.sort(renderSorter);
 	}
@@ -123,6 +125,43 @@ public class EntityManager {
 		}
 		
 		
+	}
+	public void damageUnits(int damage, Rectangle area, boolean isDmgFromPlayersUnit){
+		
+	}
+	//public boolean toprint= true;
+	public Unit enemyInRange(Unit attacker) {
+		
+		//if (toprint ==false) return null;
+		Rectangle area = new Rectangle();
+		//System.out.print("attacker x: " + attacker.getX() +"y: "+ attacker.getY() );
+		area.x = (int) (attacker.getX() - attacker.getRange());
+		area.y = (int) (attacker.getY() - attacker.getRange());
+		area.height = attacker.getHeight() + attacker.getRange()*2;
+		area.width = attacker.getWidth() + attacker.getRange()*2;
+
+		for(Entity e : entities){
+			if(!(e instanceof Unit)) continue;
+			if(((Unit)e).getIsPlayers() == attacker.getIsPlayers()) continue;
+			if(e.equals(attacker)) continue;
+			//System.out.print("x: "+ (e.getX()+e.getWidth()/2)+"y: "+(e.getY()+e.getHeight()/2));
+		//	System.out.print("area:  " + area);
+			//toprint = false;
+			if(area.contains(e.getX()+e.getWidth()/2,e.getY()+(e.getHeight()/2))) {
+				GridNode[][] grid = handler.getWorld().getGrid();
+				int eY = (int)((e.getX()+e.getWidth()/2)/Tile.TILEWIDTH);
+				int eX = (int)((e.getY()+e.getHeight()/2)/Tile.TILEHEIGHT);
+				int attackerX = (int)((attacker.getX()+attacker.getWidth()/2)/Tile.TILEWIDTH);
+				int attackerY = (int)((attacker.getY()+attacker.getHeight()/2)/Tile.TILEHEIGHT);
+				if((!(attacker instanceof Archer)) && 
+						((grid[eY][eX].getEntrenceLv() 
+								- grid[attackerX][attackerY].getEntrenceLv()) > 1 )) continue;
+					
+				return (Unit)e;
+			}
+		}
+		
+		return null;
 	}
 
 }

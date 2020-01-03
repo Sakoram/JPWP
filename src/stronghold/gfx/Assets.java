@@ -8,7 +8,7 @@ public class Assets {
 	
 	public static BufferedImage bedrock, dirt, grass1, stone, tree, iron, sand, grass2, 
 	bricks1, bricks2, water, planks1,planks2,planks3, 
-	crown, axe, bow, spear, sword, worker;
+	crown, axe, bow, spear, sword, worker, arrow;
 
 	public static BufferedImage[] btn_start;
 
@@ -24,8 +24,8 @@ public class Assets {
 		grass1 = sheet.crop(width * 2, 0, width, height);
 		grass2 = sheet.crop(width * 2, height, width, height);
 		bricks1 = sheet.crop(width * 3, 0, width, height);
-		bricks2 = sheet.crop(0, width, width, height);
-		iron = sheet.crop(width, width, width, height);
+		bricks2 = sheet.crop(0, height, width, height);
+		iron = sheet.crop(width, height, width, height);
 		stone = sheet.crop(width, height*2, width, height);
 		tree = sheet.crop(width*3, height*2, width, height);
 		water = sheet.crop(width*3, height*3, width, height);
@@ -39,6 +39,8 @@ public class Assets {
 		spear = sheet.crop(width*6, 0, width, height);
 		sword  = sheet.crop(width*5, height, width, height);
 		worker = sheet.crop(width*5, height*2, width, height);
+		
+		arrow = sheet.crop(0, height*2, width, height);
 	}
 	
 }

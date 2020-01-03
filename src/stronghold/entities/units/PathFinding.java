@@ -33,7 +33,7 @@ public class PathFinding {
     	GridNode currentNode = grid[(int)(dest.x/Tile.TILEWIDTH)][(int)(dest.y/Tile.TILEHEIGHT)];
     	openList.add(currentNode);
     	int i=0, j=0;
-    	while(openList.size()<amt && j<1000) {
+    	while(openList.size()<amt && j<100) {
 	    	for(GridNode neighbourNode : getNeighbourList(currentNode)) {
 	             if (Tile.tiles[neighbourNode.getTileId()].isSolid() || 
 	             		Math.abs(neighbourNode.getEntrenceLv() - currentNode.getEntrenceLv()) > 1 ) { 
@@ -42,11 +42,13 @@ public class PathFinding {
 	             }
 	             if (!openList.contains(neighbourNode)) {
 	                 openList.add(neighbourNode);
+	                 
 	             }
 	             
 	    	}
 	    	j++;
 	    	if(i+1<openList.size()) i++;
+	    	currentNode=openList.get(i);
     	}
     	List<Point> vectorPath = new ArrayList<Point>();
         for (GridNode gridNode : openList) {

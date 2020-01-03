@@ -9,6 +9,7 @@ import stronghold.Handler;
 import stronghold.entities.EntityManager;
 import stronghold.entities.GridNode;
 import stronghold.entities.creatures.Player;
+import stronghold.entities.objects.Arrow;
 import stronghold.entities.statics.Tree;
 import stronghold.entities.statics.buildings.*;
 import stronghold.entities.units.*;
@@ -36,23 +37,26 @@ public class World {
 		handler.getMouseManager().setEntityManager(entityManager);
 		// Temporary entity code!
 		entityManager.addEntity(new Tree(handler, 2, 2));
+		entityManager.addEntity(new Arrow(handler, 3, 2));
 		//entityManager.addEntity(new Knight(handler, 150, 500));
-		entityManager.addEntity(new Gimli(handler, 5, 2));
-		entityManager.addEntity(new Archer(handler, 5, 3));
-		entityManager.addEntity(new Worker(handler, 5, 4));
-		entityManager.addEntity(new Spearman(handler, 6, 2));
-		entityManager.addEntity(new King(handler, 6, 3));
+		entityManager.addEntity(new Gimli(handler, 5, 2,true));
+		entityManager.addEntity(new Archer(handler, 5, 3,true));
+		entityManager.addEntity(new Worker(handler, 5, 4,true));
+		entityManager.addEntity(new Spearman(handler, 6, 2,true));
+		entityManager.addEntity(new King(handler, 6, 3,true));
+		entityManager.addEntity(new Knight(handler, 9, 9,true));
+		entityManager.addEntity(new Knight(handler, 12, 12,false));
 		for(int i=3;i<9;i++) {
 			entityManager.addEntity(new Wall(handler, i, 3));
-			entityManager.addEntity(new Worker(handler, i, 8));
-			entityManager.addEntity(new Worker(handler, 8, i));
+			entityManager.addEntity(new Worker(handler, i, 8,true));
+			entityManager.addEntity(new Worker(handler, 8, i,true));
 			entityManager.addEntity(new Wall(handler, 8, i));
 		}
 		entityManager.addEntity(new Stairs(handler, 4, 4));
 		entityManager.addEntity(new Gate(handler, 7, 10,true));
 		entityManager.addEntity(new Tower(handler, 10, 10));
 		
-		System.out.print(new Wall(handler, 20, 20).getHealth());
+		//System.out.print(new Wall(handler, 20, 20).getHealth());
 		
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);

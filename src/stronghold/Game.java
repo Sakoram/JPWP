@@ -13,6 +13,7 @@ import stronghold.states.MenuState;
 import stronghold.states.State;
 
 public class Game implements Runnable {
+	private int FPS = 100;
 
 	private Display display;
 	private int width, height;
@@ -95,8 +96,7 @@ public class Game implements Runnable {
 		
 		init();
 		
-		int fps = 100;
-		double timePerTick = 1000000000 / fps;
+		double timePerTick = 1000000000 / FPS;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
@@ -164,6 +164,9 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	public int getFPS() {
+		return FPS;
 	}
 	
 }
