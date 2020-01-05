@@ -16,7 +16,7 @@ public class Archer extends Unit {
 	
 	public Archer(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
-		this.speed = 10;
+		this.speed = Tile.TILEHEIGHT/16*3;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,7 +24,7 @@ public class Archer extends Unit {
 
 	@Override
 	public void render(Graphics g) {
-		super.render(g, Assets.bow, DEFAULT_HEALTH);
+		super.render(g, Assets.bow, DEFAULT_HEALTH, isPlayers);
 		//if(this.isSelected) 
 		//	drawHP(g,health,DEFAULT_HEALTH,isPlayers);
 		

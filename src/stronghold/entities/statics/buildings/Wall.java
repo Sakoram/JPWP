@@ -23,15 +23,17 @@ public class Wall extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-		if(this.isSelected) drawSelection(g);
+		super.render(g, Assets.bricks1, DEFAULT_HEALTH, true);
+		//g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		//if(this.isSelected) drawSelection(g);
 			
 		
 	}
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
+		super.die();
+		handler.getWorld().setGridNodeEntranceLv((int)(x/Tile.TILEWIDTH), (int)(y/Tile.TILEHEIGHT), 0);
 
 	}
 

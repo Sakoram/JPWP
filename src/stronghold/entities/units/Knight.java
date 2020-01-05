@@ -11,10 +11,11 @@ import stronghold.tiles.Tile;
 public class Knight extends Unit {
 	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
 	public static final int RANGE = 1;
+	public static final int DAMAGE = 100;
 	public static final int DEFAULT_HEALTH = 600;
 	public Knight(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
-		
+		this.speed = Tile.TILEHEIGHT/16*2;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,7 +31,7 @@ public class Knight extends Unit {
 
 	@Override
 	public void atack(Entity enemy) {
-		enemy.hurt(100);
+		enemy.hurt(DAMAGE);
 		
 	}
 	@Override

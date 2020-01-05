@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="res"/>
-	<classpathentry kind="lib" path="/home/a/Desktop/szkola/twierdza/res/vecmath-1.5.2.jar"/>
+	<classpathentry kind="lib" path="/home/a/Desktop/szkola/twierdza/vecmath-1.5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

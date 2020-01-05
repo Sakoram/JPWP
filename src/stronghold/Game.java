@@ -8,12 +8,13 @@ import stronghold.gfx.Assets;
 import stronghold.gfx.GameCamera;
 import stronghold.input.KeyManager;
 import stronghold.input.MouseManager;
+import stronghold.states.GameOverState;
 import stronghold.states.GameState;
 import stronghold.states.MenuState;
 import stronghold.states.State;
 
 public class Game implements Runnable {
-	private int FPS = 100;
+	private int FPS = 60;
 
 	private Display display;
 	private int width, height;
@@ -28,10 +29,12 @@ public class Game implements Runnable {
 	//States
 	public State gameState;
 	public State menuState;
+	public State gameOverState;
 	
 	//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
+
 	
 	//Camera
 	private GameCamera gameCamera;
@@ -60,10 +63,12 @@ public class Game implements Runnable {
 		gameCamera = new GameCamera(handler, 0, 0);
 		
 		menuState = new MenuState(handler);
-		gameState = new GameState(handler);
+		//gameState = new GameState(handler);
+		
+		gameOverState = new GameOverState(handler);
+		
 		
 		State.setState(menuState);
-		handler.getWorld().init();
 	}
 	
 	private void tick(){
@@ -117,7 +122,7 @@ public class Game implements Runnable {
 			}
 			
 			if(timer >= 1000000000){
-				//System.out.println("Ticks and Frames: " + ticks);
+				System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
@@ -145,6 +150,10 @@ public class Game implements Runnable {
 	
 	public int getHeight(){
 		return height;
+	}
+	public void gameOver(boolean isGameWon) {
+		State.setState(gameOverState);
+		//stop();
 	}
 	
 	public synchronized void start(){

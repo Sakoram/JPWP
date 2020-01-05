@@ -16,6 +16,7 @@ public class GameState extends State {
 		world = new World(handler, "res/worlds/world1.txt");
 		handler.setWorld(world);
 		uiManager = new UIManager(handler);
+		world.init();
 		
 	}
 	

@@ -9,11 +9,13 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class Gimli extends Unit {
-	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
+	private static final int TICKS_TO_ATTACK = (int)(handler.getGame().getFPS()*1.5);
 	public static final int DEFAULT_HEALTH = 900;
+	public static final int DAMAGE = 250;
 	public static final int RANGE = 1;
 	public Gimli(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
+		this.speed = Tile.TILEHEIGHT/16*2;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,7 +34,7 @@ public class Gimli extends Unit {
 
 	@Override
 	public void atack(Entity enemy) {
-		// TODO Auto-generated method stub
+		enemy.hurt(DAMAGE);
 		
 	}
 	@Override

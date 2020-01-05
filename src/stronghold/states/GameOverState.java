@@ -9,19 +9,26 @@ import stronghold.ui.ClickListener;
 import stronghold.ui.UIImageButton;
 import stronghold.ui.UIManager;
 
-public class MenuState extends State {
+public class GameOverState extends State {
 
 	
 
-	public MenuState(Handler handler) {
+	public GameOverState(Handler handler) {
 		super(handler);
 		uiManager = new UIManager(handler);
 		
+
+		uiManager.addObject(new UIImageButton(400, 400, 64, 64, Assets.iron, new ClickListener() {
+			@Override
+			public void onClick() {
+				State.setState(handler.getGame().menuState);
+			}
+		}));
 	}
 
 	@Override
 	public void tick() {
-		UIManager.getUIManager().tick();
+		uiManager.tick();
 		
 		// Temporarily just go directly to the GameState, skip the menu state!
 		//handler.getMouseManager().setUIManager(null);
@@ -30,7 +37,7 @@ public class MenuState extends State {
 
 	@Override
 	public void render(Graphics g) {
-		UIManager.getUIManager().render(g);
+		uiManager.render(g);
 	}
 
 }

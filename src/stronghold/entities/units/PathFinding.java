@@ -50,13 +50,13 @@ public class PathFinding {
 	    	if(i+1<openList.size()) i++;
 	    	currentNode=openList.get(i);
     	}
-    	List<Point> vectorPath = new ArrayList<Point>();
+    	List<Point> locations = new ArrayList<Point>();
         for (GridNode gridNode : openList) {
-            vectorPath.add(new Point(gridNode.getx()*Tile.TILEHEIGHT , 
+        	locations.add(new Point(gridNode.getx()*Tile.TILEHEIGHT , 
             		gridNode.gety()*Tile.TILEHEIGHT   ));
             
         }
-        return vectorPath;
+        return locations;
     }
 
     public List<Point> findPath(Point startWorldPosition, Point endWorldPosition) {
@@ -96,6 +96,7 @@ public class PathFinding {
             for (int y = 0; y < handler.getWorld().getWidth(); y++) {
                 
             	grid[x][y].gCost = 99999999;
+            	grid[x][y].hCost = 99999999;
                 grid[x][y].CalculateFCost();
                 grid[x][y].cameFromTile = null;
             }

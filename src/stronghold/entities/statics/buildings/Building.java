@@ -14,13 +14,22 @@ public abstract class Building extends Entity {
 	}
 
 	@Override
-	public void select(Rectangle selection) {
+	public boolean select(Rectangle selection) {
 		if((selection.getHeight()<3) && (selection.getWidth()<3) && 
-				(this.getX() < selection.x && this.getX()+this.width > selection.x && this.getY() < selection.y  && this.getY() +this.height > selection.y ))
+				(this.getX() < selection.x && this.getX()+this.width > selection.x && 
+						this.getY() < selection.y  && this.getY() +this.height > selection.y )) {
 			this.isSelected =true;
-		else 
+			
+			return true;
+		}
+			
+		else {
 			this.isSelected = false;
+			return false;
+		}
+			
 		
 	}
+	
 
 }

@@ -14,6 +14,7 @@ public class Worker extends Unit {
 	public static final int RANGE = 0;
 	public Worker(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
+		this.speed = Tile.TILEHEIGHT/16*3;
 		// TODO Auto-generated constructor stub
 	}
 

@@ -34,11 +34,12 @@ public abstract class Unit extends Entity {
 
 
 	@Override
-	public void select(Rectangle selection) {
+	public boolean select(Rectangle selection) {
 		if(selection.intersects(new Rectangle((int)this.x+this.bounds.x,(int)this.y+this.bounds.y,this.bounds.width,this.bounds.height)))
 			this.isSelected =true;
 		else 
 			this.isSelected = false;
+		return false;
 		
 	}
 	public void setPath(List<Point> path) {
@@ -49,12 +50,7 @@ public abstract class Unit extends Entity {
 	
 	}
 
-	public void render(Graphics g, BufferedImage texture, int DEFAULT_HEALTH) {
-		if(this.isSelected) 
-			drawHP(g,health,DEFAULT_HEALTH,isPlayers);
-		
-		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-	}
+
 
 	//@Override
 	public void tick(int TICKS_TO_ATTACK) {

@@ -36,8 +36,8 @@ public class Tree extends Entity {
 	}
 
 	@Override
-	public void select(Rectangle selection) {
-		// TODO Auto-generated method stub
+	public boolean select(Rectangle selection) {
+		return false;
 		
 	}
 

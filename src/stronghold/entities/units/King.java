@@ -9,12 +9,14 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public class King extends Unit {
-	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
+	private static int TICKS_TO_ATTACK;
 	public static final int DEFAULT_HEALTH = 2000;
 	public static final int RANGE = 1;
+	public static final int DAMAGE = 500;
 	public King(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
-		// TODO Auto-generated constructor stub
+		this.speed = Tile.TILEHEIGHT/16*1;
+		TICKS_TO_ATTACK = handler.getGame().getFPS();
 	}
 
 
@@ -30,6 +32,7 @@ public class King extends Unit {
 	@Override
 	public void die() {
 		super.die();
+		handler.getGame().gameOver(false);
 
 	}
 
@@ -37,7 +40,7 @@ public class King extends Unit {
 
 	@Override
 	public void atack(Entity enemy) {
-		// TODO Auto-generated method stub
+		enemy.hurt(DAMAGE);
 		
 	}
 	@Override

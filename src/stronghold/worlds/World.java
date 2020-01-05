@@ -2,14 +2,11 @@ package stronghold.worlds;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.List;
-
 
 import stronghold.Handler;
 import stronghold.entities.EntityManager;
 import stronghold.entities.GridNode;
-import stronghold.entities.creatures.Player;
-import stronghold.entities.objects.Arrow;
+
 import stronghold.entities.statics.Tree;
 import stronghold.entities.statics.buildings.*;
 import stronghold.entities.units.*;
@@ -21,20 +18,27 @@ public class World {
 	
 	private Handler handler;
 	private int width, height;
-	private int spawnX, spawnY;
 	private GridNode[][] grid;
 	//private int[][] grid;
 	private EntityManager entityManager;
+	private int spawnX, spawnY;
+	private Point[] spawnPoints;
+	private int ticksToSpawnEnemies = 0, TICKS_TO_SPAWN_ENEMIES;
+	private int difficultyLv=1;
+	private int waveNum=1;
 	
 	public World(Handler handler, String path){
 		this.handler = handler;
 		loadWorld(path);
-		
 	}
 	
 	public void init() {
-		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		
+		entityManager = new EntityManager(handler,spawnX,spawnY);
 		handler.getMouseManager().setEntityManager(entityManager);
+		TICKS_TO_SPAWN_ENEMIES = handler.getGame().getFPS()*15;//60;
+		//entityManager.init(new King(handler, spawnX, spawnY, true));
+		//entityManager.addEntity(new King(handler, spawnX, spawnY, true));
 		// Temporary entity code!
 		entityManager.addEntity(new Tree(handler, 2, 2));
 		//entityManager.addEntity(new Arrow(handler, 3, 2));
@@ -43,28 +47,32 @@ public class World {
 		entityManager.addEntity(new Archer(handler, 5, 3,true));
 		entityManager.addEntity(new Worker(handler, 5, 4,true));
 		entityManager.addEntity(new Spearman(handler, 6, 2,true));
-		entityManager.addEntity(new King(handler, 6, 3,true));
 		entityManager.addEntity(new Knight(handler, 9, 9,true));
-		entityManager.addEntity(new King(handler, 12, 12,false));
 		for(int i=3;i<9;i++) {
 			entityManager.addEntity(new Wall(handler, i, 3));
-			entityManager.addEntity(new Worker(handler, i, 8,true));
-			entityManager.addEntity(new Worker(handler, 8, i,true));
-			entityManager.addEntity(new Wall(handler, 8, i));
+			entityManager.addEntity(new Wall(handler, i, 8));
+			//entityManager.addEntity(new Archer(handler, i, 8,true));
+			//entityManager.addEntity(new Archer(handler, 8, i,true));
+			entityManager.addEntity(new Wall(handler, 9, i));
+			entityManager.addEntity(new Wall(handler, 2, i));
 		}
 		entityManager.addEntity(new Stairs(handler, 4, 4));
 		entityManager.addEntity(new Gate(handler, 7, 10,true));
 		entityManager.addEntity(new Tower(handler, 10, 10));
+		entityManager.addEntity(new Barracks(handler, 4, 10));
 		
 		//System.out.print(new Wall(handler, 20, 20).getHealth());
-		
-		entityManager.getPlayer().setX(spawnX);
-		entityManager.getPlayer().setY(spawnY);
+		//entityManager.spawnEnemies(2,2,2);
 		
 	}
 	public void tick(){
 		handler.getGameCamera().adjustGameCamera();
 		entityManager.tick();
+		ticksToSpawnEnemies++;
+		if(ticksToSpawnEnemies > TICKS_TO_SPAWN_ENEMIES) {
+			ticksToSpawnEnemies=0;
+			spawnWave();
+		}
 	}
 	
 	public void render(Graphics g){
@@ -95,13 +103,16 @@ public class World {
 	}
 	
 	private void loadWorld(String path){
+		spawnPoints = new Point[3];
 		String file = Utils.loadFileAsString(path);
 		String[] tokens = file.split("\\s+");
 		width = Utils.parseInt(tokens[0]);
 		height = Utils.parseInt(tokens[1]);
 		spawnX = Utils.parseInt(tokens[2]);
 		spawnY = Utils.parseInt(tokens[3]);
-		
+		spawnPoints[0] = new Point(width-2, height-2);
+		spawnPoints[1] = new Point(2, height-2);
+		spawnPoints[2] = new Point(width-2, 2);
 		//grid = new int[width][height];
 		grid = new GridNode[width][height];
 		for(int y = 0;y < height;y++){
@@ -110,6 +121,14 @@ public class World {
 				grid[x][y]= new GridNode(Utils.parseInt(tokens[(x + y * width) + 4]),x,y);
 			}
 		}
+	}
+	public void spawnWave() {
+		System.out.print("spawn");
+		if(waveNum > 5) handler.getGame().gameOver(true);
+		for(int i = 0; i < difficultyLv; i++) {
+			entityManager.spawnEnemies(spawnPoints[i].x, spawnPoints[i].y, waveNum);
+		}
+		waveNum++;
 	}
 	
 	public int getWidth(){
@@ -128,6 +147,11 @@ public class World {
 	}
 	public GridNode[][] getGrid(){
 		return grid;
+	}
+
+	public void setDifficultyLv(int Lv) {
+		difficultyLv = Lv;
+		
 	}
 }
 

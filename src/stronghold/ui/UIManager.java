@@ -6,8 +6,20 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import stronghold.Handler;
+import stronghold.states.State;
 
-public class UIManager {
+public abstract class UIManager {
+	private static UIManager currentUIManager = null;
+	
+	public static void setUIManager(UIManager uiManager){
+		currentUIManager = uiManager;
+
+	}
+	
+	public static UIManager getUIManager(){
+		return currentUIManager;
+	}
+	
 
 	private Handler handler;
 	private ArrayList<UIObject> objects;

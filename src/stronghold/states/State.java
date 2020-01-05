@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 
 import stronghold.Handler;
+import stronghold.ui.MenuUI;
 import stronghold.ui.UIManager;
 
 
@@ -13,7 +14,7 @@ public abstract class State {
 	
 	public static void setState(State state){
 		currentState = state;
-		State.handler.getMouseManager().setUIManager(state.getUiManager());
+		handler.getMouseManager().setUIManager(UIManager.getUIManager());
 	}
 	
 	public static State getState(){
@@ -22,14 +23,11 @@ public abstract class State {
 	
 	//CLASS
 	
-	protected UIManager uiManager;
+	protected MenuUI uiManager;
 	
 	
 	public State(Handler handler){
 		State.handler = handler;
-	}
-	public UIManager getUiManager() {
-		return uiManager;
 	}
 	
 	public abstract void tick();

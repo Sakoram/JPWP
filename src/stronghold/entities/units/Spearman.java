@@ -12,8 +12,10 @@ public class Spearman extends Unit {
 	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
 	public static final int DEFAULT_HEALTH = 300;
 	public static final int RANGE = 2;
+	public static final int DAMAGE = 50;
 	public Spearman(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
+		this.speed = Tile.TILEHEIGHT/16*3;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,7 +32,7 @@ public class Spearman extends Unit {
 
 	@Override
 	public void atack(Entity enemy) {
-		// TODO Auto-generated method stub
+		enemy.hurt(DAMAGE);
 		
 	}
 	@Override

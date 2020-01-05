@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import javax.vecmath.Vector2d;
 
@@ -40,7 +41,7 @@ public abstract class Entity {
 		active=false;
 	}
 	
-	public abstract void select(Rectangle selection);
+	public abstract boolean select(Rectangle selection);
 	
 	public void hurt(int amt){
 		health -= amt;
@@ -83,12 +84,20 @@ public abstract class Entity {
 			(int) (y + bounds.y - handler.getGameCamera().getyOffset()),
 			bounds.width, bounds.height);
 	}
+	
 	public void drawHP(Graphics g, int currentHP, int maxHP, boolean isPlayer) {
 		if(isPlayer) g.setColor(Color.green);
 		else g.setColor(Color.red);
 		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
 				(int) (y + bounds.y - handler.getGameCamera().getyOffset())-bounds.height/16,
 				bounds.width*currentHP/maxHP, bounds.height/16);
+	}
+	
+	public void render(Graphics g, BufferedImage texture, int DEFAULT_HEALTH, boolean isPlayers) {
+		if(this.isSelected) 
+			drawHP(g,health,DEFAULT_HEALTH,isPlayers);
+		
+		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
 
 	public float getX() {
@@ -138,5 +147,6 @@ public abstract class Entity {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
 	
 }

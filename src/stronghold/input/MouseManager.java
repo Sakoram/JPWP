@@ -60,8 +60,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 			rightPressed = true;
 			if(entityManager != null)
 			{
-				entityManager.MoveUnits(new Point(pressedX, pressedY));
-				entityManager.deselectEntities();
+				entityManager.MoveSelectedUnits(new Point(pressedX, pressedY));
+				//entityManager.deselectEntities();
 			}
 			
 		}
