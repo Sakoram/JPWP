@@ -14,6 +14,7 @@ import stronghold.states.State;
 import stronghold.ui.BarracksMenuUI;
 import stronghold.ui.BuildingMenuUI;
 import stronghold.ui.GameOverUI;
+import stronghold.ui.GateMenuUI;
 import stronghold.ui.MenuUI;
 import stronghold.ui.StandardGameUI;
 import stronghold.ui.UIManager;
@@ -44,6 +45,7 @@ public class Game implements Runnable {
 	public UIManager standardGameUI;
 	public UIManager buildingMenuUI;
 	public UIManager barracksMenuUI;
+	public UIManager gateMenuUI;
 
 	
 	//Camera
@@ -81,6 +83,7 @@ public class Game implements Runnable {
 		standardGameUI = new StandardGameUI(handler);
 		buildingMenuUI = new BuildingMenuUI(handler);
 		barracksMenuUI = new BarracksMenuUI(handler);
+		gateMenuUI = new GateMenuUI(handler);
 		
 		State.setState(menuState);
 		UIManager.setUIManager(menuUI);

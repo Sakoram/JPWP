@@ -6,7 +6,7 @@ public class Assets {
 	
 	private static final int width = 32, height = 32;
 	
-	public static BufferedImage bedrock, dirt, grass1, stone, tree, iron, sand, grass2, 
+	public static BufferedImage bedrock, dirt, grass1, stone, tree, bars, iron, sand, grass2, 
 	bricks1, bricks2, bricks3, water, planks1,planks2,planks3, 
 	crown, axe, bow, spear, sword, worker, arrow;
 
@@ -41,6 +41,7 @@ public class Assets {
 		iron = sheet.crop(width, height, width, height);
 		stone = sheet.crop(width, height*2, width, height);
 		tree = sheet.crop(width*3, height*2, width, height);
+		bars = sheet.crop(width*4, height*2, width/2, height/2);
 		water = sheet.crop(width*3, height*3, width, height);
 		sand = sheet.crop(width*3, height, width, height);
 		planks3 = sheet.crop(width, height*3, width, height);
