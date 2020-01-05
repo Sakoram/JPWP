@@ -14,6 +14,7 @@ import stronghold.entities.statics.buildings.Building;
 import stronghold.entities.units.*;
 
 import stronghold.tiles.Tile;
+import stronghold.ui.UIManager;
 
 public class EntityManager {
 	
@@ -98,7 +99,7 @@ public class EntityManager {
 		return false;
 	}
 
-	public void render(Graphics g){
+	public synchronized void render(Graphics g){
 		for(Entity e : entities){
 			if(!(e instanceof Unit)) e.render(g);
 		}
@@ -139,9 +140,9 @@ public class EntityManager {
 		selection.y+=handler.getGameCamera().getyOffset();
 		boolean isAnyBuildingSelected = false;
 		for(Entity e : entities){
-			isAnyBuildingSelected = isAnyBuildingSelected || e.select(selection);
+			isAnyBuildingSelected = e.select(selection) || isAnyBuildingSelected;
 		}
-		
+		if(!isAnyBuildingSelected) UIManager.setUIManager(handler.getGame().standardGameUI);
 	}
 	public synchronized void deselectEntities() {
 		for(Entity e : entities){
@@ -154,7 +155,7 @@ public class EntityManager {
 		dest.y+=handler.getGameCamera().getyOffset();
 		List<Entity> unitsToMove = new ArrayList<Entity>();
 		for(Entity e : entities){
-			if(e instanceof Unit && e.isSelected)
+			if(e instanceof Unit && e.isSelected && ((Unit) e).getIsPlayers())
 				unitsToMove.add(e);
 		MoveUnits(dest,unitsToMove);
 		}

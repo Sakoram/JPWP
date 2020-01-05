@@ -25,8 +25,8 @@ public class GameCamera {
 		
 		if(yOffset < 0){
 			yOffset = 0;
-		}else if(yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()){
-			yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+		}else if(yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()+100){
+			yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()+100;
 		}
 	}
 	

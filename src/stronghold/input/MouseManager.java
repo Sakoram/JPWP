@@ -14,7 +14,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
 	private boolean leftPressed, rightPressed;
 	private int mouseX, mouseY, pressedX, pressedY;
-	private UIManager uiManager;
+	//private UIManager uiManager;
 	private EntityManager entityManager;
 	private Rectangle selection;
 	
@@ -22,10 +22,10 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 ;
 	}
 	
-	public void setUIManager(UIManager uiManager){
-		this.uiManager = uiManager;
-	}
-	
+//	public void setUIManager(UIManager uiManager){
+//		this.uiManager = uiManager;
+//	}
+//	
 	// Getters
 	
 	public boolean isLeftPressed(){
@@ -75,15 +75,16 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		{
 			//System.out.println("released on x, y: " + x +", "+ y );
 			leftPressed = false;
-			if(uiManager != null)
-				uiManager.onMouseRelease(e);
-			if(entityManager != null)
+			if(UIManager.getUIManager() != null)
+				UIManager.getUIManager().onMouseRelease(e);
+			if(entityManager != null && selection.y< entityManager.getHandler().getHeight()-100)
 			{
 				selection.height = selection.height == 0 ? 1 : selection.height;
 				selection.width = selection.width == 0 ? 1 : selection.width;
 				entityManager.selectEntities(selection);
-				selection = null;
+				
 			}
+			selection = null;
 			
 				
 		}
@@ -101,8 +102,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		mouseY = e.getY();
 		
 		
-		if(uiManager != null)
-			uiManager.onMouseMove(e);
+		if(UIManager.getUIManager() != null)
+			UIManager.getUIManager().onMouseMove(e);
 	}
 	private void updateSelection() {
 		selection.x = pressedX < mouseX ? pressedX : mouseX;

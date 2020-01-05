@@ -21,7 +21,7 @@ public abstract class UIManager {
 	}
 	
 
-	private Handler handler;
+	protected Handler handler;
 	private ArrayList<UIObject> objects;
 	
 	public UIManager(Handler handler){

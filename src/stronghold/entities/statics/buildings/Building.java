@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.tiles.Tile;
+import stronghold.ui.BuildingMenuUI;
+import stronghold.ui.UIManager;
 
 public abstract class Building extends Entity {
 
@@ -18,8 +20,9 @@ public abstract class Building extends Entity {
 		if((selection.getHeight()<3) && (selection.getWidth()<3) && 
 				(this.getX() < selection.x && this.getX()+this.width > selection.x && 
 						this.getY() < selection.y  && this.getY() +this.height > selection.y )) {
-			this.isSelected =true;
-			
+			this.isSelected = true;
+			((BuildingMenuUI) handler.getGame().buildingMenuUI).setBuilding(this);
+			UIManager.setUIManager(handler.getGame().buildingMenuUI);
 			return true;
 		}
 			

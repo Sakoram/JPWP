@@ -38,7 +38,9 @@ public class Tower extends Building {
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, 0);
 
 	}
 

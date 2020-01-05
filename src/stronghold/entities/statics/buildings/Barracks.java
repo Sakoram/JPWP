@@ -1,10 +1,13 @@
 package stronghold.entities.statics.buildings;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
+import stronghold.ui.BuildingMenuUI;
+import stronghold.ui.UIManager;
 
 public class Barracks extends Building {
 	public static final int DEFAULT_HEALTH = 500;
@@ -38,8 +41,18 @@ public class Barracks extends Building {
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, 0);
 	}
+	@Override
+	public boolean select(Rectangle selection) {
+	if(super.select(selection)) {
+		UIManager.setUIManager(handler.getGame().barracksMenuUI);
+		return true;
+	}
+	return false;
+	}
+	
 
 }

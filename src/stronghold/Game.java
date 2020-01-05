@@ -8,10 +8,15 @@ import stronghold.gfx.Assets;
 import stronghold.gfx.GameCamera;
 import stronghold.input.KeyManager;
 import stronghold.input.MouseManager;
-import stronghold.states.GameOverState;
 import stronghold.states.GameState;
 import stronghold.states.MenuState;
 import stronghold.states.State;
+import stronghold.ui.BarracksMenuUI;
+import stronghold.ui.BuildingMenuUI;
+import stronghold.ui.GameOverUI;
+import stronghold.ui.MenuUI;
+import stronghold.ui.StandardGameUI;
+import stronghold.ui.UIManager;
 
 public class Game implements Runnable {
 	private int FPS = 60;
@@ -29,11 +34,16 @@ public class Game implements Runnable {
 	//States
 	public State gameState;
 	public State menuState;
-	public State gameOverState;
 	
 	//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
+	
+	public UIManager menuUI;
+	public UIManager gameOverUI;
+	public UIManager standardGameUI;
+	public UIManager buildingMenuUI;
+	public UIManager barracksMenuUI;
 
 	
 	//Camera
@@ -65,10 +75,15 @@ public class Game implements Runnable {
 		menuState = new MenuState(handler);
 		//gameState = new GameState(handler);
 		
-		gameOverState = new GameOverState(handler);
 		
+		menuUI = new MenuUI(handler);
+		gameOverUI = new GameOverUI(handler);
+		standardGameUI = new StandardGameUI(handler);
+		buildingMenuUI = new BuildingMenuUI(handler);
+		barracksMenuUI = new BarracksMenuUI(handler);
 		
 		State.setState(menuState);
+		UIManager.setUIManager(menuUI);
 	}
 	
 	private void tick(){
@@ -91,6 +106,8 @@ public class Game implements Runnable {
 		
 		if(State.getState() != null)
 			State.getState().render(g);
+		if(UIManager.getUIManager() != null)
+			UIManager.getUIManager().render(g);
 		
 		//End Drawing!
 		bs.show();
@@ -152,7 +169,9 @@ public class Game implements Runnable {
 		return height;
 	}
 	public void gameOver(boolean isGameWon) {
-		State.setState(gameOverState);
+		State.setState(menuState);
+		UIManager.setUIManager(gameOverUI);
+		mouseManager.setEntityManager(null);
 		//stop();
 	}
 	

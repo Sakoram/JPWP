@@ -14,7 +14,6 @@ public abstract class State {
 	
 	public static void setState(State state){
 		currentState = state;
-		handler.getMouseManager().setUIManager(UIManager.getUIManager());
 	}
 	
 	public static State getState(){
@@ -23,7 +22,7 @@ public abstract class State {
 	
 	//CLASS
 	
-	protected MenuUI uiManager;
+	//protected UIManager uiManager = null;
 	
 	
 	public State(Handler handler){
@@ -33,5 +32,9 @@ public abstract class State {
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);
+
+//	public  UIManager getStandardUI() {
+//		return uiManager;
+//	}
 	
 }

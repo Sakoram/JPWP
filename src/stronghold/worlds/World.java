@@ -1,5 +1,7 @@
 package stronghold.worlds;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -10,6 +12,7 @@ import stronghold.entities.GridNode;
 import stronghold.entities.statics.Tree;
 import stronghold.entities.statics.buildings.*;
 import stronghold.entities.units.*;
+import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 import stronghold.utils.Utils;
 
@@ -25,7 +28,7 @@ public class World {
 	private Point[] spawnPoints;
 	private int ticksToSpawnEnemies = 0, TICKS_TO_SPAWN_ENEMIES;
 	private int difficultyLv=1;
-	private int waveNum=1;
+	private int waveNum=0; //first wave without enemies
 	
 	public World(Handler handler, String path){
 		this.handler = handler;
@@ -79,7 +82,7 @@ public class World {
 		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
 		int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
 		int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
-		int yEnd = (int) Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+		int yEnd = (int) Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()-100) / Tile.TILEHEIGHT + 1);
 		
 		for(int y = yStart;y < yEnd;y++){
 			for(int x = xStart;x < xEnd;x++){
@@ -89,6 +92,10 @@ public class World {
 		}
 		//Entities
 		entityManager.render(g);
+		for(int x = 0;x<handler.getWidth();x=x+Tile.TILEWIDTH*2 )
+			for(int y = handler.getHeight()-100; y < handler.getHeight(); y=y+Tile.TILEHEIGHT*2)
+				g.drawImage(Assets.bricks3,  x, y, Tile.TILEWIDTH*2, Tile.TILEHEIGHT*2, null);
+
 	}
 	
 	public Tile getTile(int x, int y){
@@ -141,6 +148,9 @@ public class World {
 
 	public EntityManager getEntityManager() {
 		return entityManager;
+	}
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 	public void setGridNodeEntranceLv(int x,int y,int Lv) {
 		grid[x][y].setEntranceLv(Lv);
