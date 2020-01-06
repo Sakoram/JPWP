@@ -28,7 +28,7 @@ public class World {
 	private Point[] spawnPoints;
 	private int ticksToSpawnEnemies = 0, TICKS_TO_SPAWN_ENEMIES;
 	private int difficultyLv=1;
-	private int waveNum=0; //first wave without enemies
+	private int waveNum=1; //first wave without enemies
 	
 	public World(Handler handler, String path){
 		this.handler = handler;
@@ -130,7 +130,7 @@ public class World {
 		}
 	}
 	public void spawnWave() {
-		System.out.print("spawn");
+		System.out.println("spawn");
 		if(waveNum > 5) handler.getGame().gameOver(true);
 		for(int i = 0; i < difficultyLv; i++) {
 			entityManager.spawnEnemies(spawnPoints[i].x, spawnPoints[i].y, waveNum);

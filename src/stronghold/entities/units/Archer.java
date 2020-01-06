@@ -16,7 +16,7 @@ public class Archer extends Unit {
 	
 	public Archer(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
-		this.speed = Tile.TILEHEIGHT/16*3;
+		this.speed = Tile.TILEHEIGHT/32*3;
 		// TODO Auto-generated constructor stub
 	}
 

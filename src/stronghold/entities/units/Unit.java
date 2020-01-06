@@ -16,7 +16,7 @@ import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 
 public abstract class Unit extends Entity {
-	
+
 	protected int ticksToAttack;
 	protected boolean isPlayers;
 	protected List<Point> path;
@@ -25,64 +25,71 @@ public abstract class Unit extends Entity {
 	protected int speed = 5;
 	protected Point a;
 	protected int range;
-	public Unit(Handler handler, float x, float y, int width, int height, int health, boolean isPlayers, int range){
-		super(handler, x*Tile.TILEWIDTH, y*Tile.TILEHEIGHT, width, height, health);
+	protected int ticksToCheckEnemy = 0;
+
+	public Unit(Handler handler, float x, float y, int width, int height, int health, boolean isPlayers, int range) {
+		super(handler, x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT, width, height, health);
 		this.isPlayers = isPlayers;
 		this.range = range;
 	}
 
-
-
 	@Override
 	public boolean select(Rectangle selection) {
-		if(selection.intersects(new Rectangle((int)this.x+this.bounds.x,(int)this.y+this.bounds.y,this.bounds.width,this.bounds.height)))
-			this.isSelected =true;
-		else 
+		if (selection.intersects(new Rectangle((int) this.x + this.bounds.x, (int) this.y + this.bounds.y,
+				this.bounds.width, this.bounds.height)))
+			this.isSelected = true;
+		else
 			this.isSelected = false;
 		return false;
-		
+
 	}
+
 	public void setPath(List<Point> path) {
-		if(path!=null) {
+		if (path != null) {
 			this.path = path;
 			this.pathIterator = this.path.iterator();
+			if(pathIterator.hasNext()) pathIterator.next();
 		}
-	
+
 	}
 
-
-
-	//@Override
+	// @Override
 	public void tick(int TICKS_TO_ATTACK) {
 		ticksToAttack++;
-		if(ticksToAttack >TICKS_TO_ATTACK && active) {
-			ticksToAttack=0;
-			Unit enemy = null;
-			if(!(this instanceof Worker)) {
-				enemy = handler.getWorld().getEntityManager().enemyInRange(this);
-				if(enemy != null) {
+		Unit enemy = null;
+		enemy = handler.getWorld().getEntityManager().enemyInRange(this);
+		if (enemy != null) {
+			if (ticksToAttack > TICKS_TO_ATTACK && active) {
+				ticksToAttack = 0;
+
+				if (!(this instanceof Worker)) {
+
 					atack(enemy);
 				}
-			}
-		}
-		if(pathIterator!=null && pathIterator.hasNext())
-		{
-			if( destination == null || moveToDest(destination,speed) )  destination = pathIterator.next();
+			} 
+				
+
 		} else {
-			if( destination == null || moveToDest(destination,speed) ) destination = null;
+			if (pathIterator != null && pathIterator.hasNext()) {
+				if (destination == null || moveToDest(destination, speed))
+					destination = pathIterator.next();
+			} else {
+				if (destination == null || moveToDest(destination, speed))
+					destination = null;
+			}
+
 		}
-			
-			//this.x
-	
+
 	}
+
 	public abstract void atack(Entity enemy);
-	
+
 	public int getRange() {
-		return this.range*Tile.TILEHEIGHT;
+		return this.range * Tile.TILEHEIGHT;
 	}
+
 	public boolean getIsPlayers() {
 		return isPlayers;
 	}
-
 
 }

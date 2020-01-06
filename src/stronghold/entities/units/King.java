@@ -15,7 +15,7 @@ public class King extends Unit {
 	public static final int DAMAGE = 500;
 	public King(Handler handler, float x, float y, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH,isPlayers,RANGE);
-		this.speed = Tile.TILEHEIGHT/16*1;
+		this.speed = Tile.TILEHEIGHT/32*1;
 		TICKS_TO_ATTACK = handler.getGame().getFPS();
 	}
 
