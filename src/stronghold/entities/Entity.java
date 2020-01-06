@@ -48,6 +48,7 @@ public abstract class Entity {
 		if(health <= 0){
 			die();
 		}
+
 	}
 	protected boolean moveToDest(Point dest, int speed) {
 		Vector2d temp = new Vector2d(dest.getX(),dest.getY());
@@ -80,9 +81,9 @@ public abstract class Entity {
 	public void drawSelection(Graphics g) {
 		g.setColor(new Color(0,250,0,100));
 		
-		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-			(int) (y + bounds.y - handler.getGameCamera().getyOffset()),
-			bounds.width, bounds.height);
+		g.fillRect((int) (x   - handler.getGameCamera().getxOffset()),
+			(int) (y  - handler.getGameCamera().getyOffset()),
+			width, height);
 	}
 	
 	public void drawHP(Graphics g, boolean isPlayer) {

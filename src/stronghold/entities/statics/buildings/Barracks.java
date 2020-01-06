@@ -13,13 +13,7 @@ public class Barracks extends Building {
 	public static final int DEFAULT_HEALTH = 500;
 	public Barracks(Handler handler, int x, int y) {
 		super(handler, x, y, Tile.TILEWIDTH*3, Tile.TILEHEIGHT*3,DEFAULT_HEALTH);
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-				handler.getWorld().setGridNodeEntranceLv(x+i, y+j, 6);
-
-	
-		
-		
+		setLvUnder();
 	}
 
 	@Override
@@ -45,13 +39,6 @@ public class Barracks extends Building {
 	}
 
 	@Override
-	public void die() {
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, 0);
-		super.die();
-	}
-	@Override
 	public boolean select(Rectangle selection) {
 	if(super.select(selection)) {
 		UIManager.setUIManager(handler.getGame().barracksMenuUI);
@@ -62,6 +49,11 @@ public class Barracks extends Building {
 	@Override
 	public int getMaxHealth() {
 		return DEFAULT_HEALTH;
+	}
+
+	@Override
+	public void setLvUnder() {
+		setLvUnder(6);
 	}
 
 	

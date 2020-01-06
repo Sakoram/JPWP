@@ -33,14 +33,7 @@ public class Tower extends Building {
 		
 	}
 
-	@Override
-	public void die() {
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, 0);
-		super.die();
 
-	}
 	@Override
 	public int getMaxHealth() {
 		return DEFAULT_HEALTH;
@@ -52,6 +45,12 @@ public class Tower extends Building {
 			for(int j=0;j<3;j++)
 			g.drawImage(Assets.bricks2, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH), 
 					(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT), Tile.TILEHEIGHT, Tile.TILEWIDTH, null);
+		
+	}
+
+	@Override
+	public void setLvUnder() {
+		setLvUnder(4);
 		
 	}
 

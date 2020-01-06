@@ -71,7 +71,7 @@ public class StandardGameUI extends UIManager {
 				
 				if(activeObject !=null)
 					removeObject(activeObject);
-				selectedBuilding = new Stairs(handler, 0, 0);
+				selectedBuilding = new Stairs(handler, 0, 0, 0);
 				activeObject = new UIObjectSelectedBuilding(handler,selectedBuilding);
 				addObject(activeObject);;
 			}

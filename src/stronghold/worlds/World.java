@@ -59,7 +59,7 @@ public class World {
 			entityManager.addEntity(new Wall(handler, 9, i));
 			entityManager.addEntity(new Wall(handler, 2, i));
 		}
-		entityManager.addEntity(new Stairs(handler, 4, 4));
+		entityManager.addEntity(new Stairs(handler, 6, 4,3));
 		entityManager.addEntity(new Gate(handler, 7, 10,true));
 		entityManager.addEntity(new Tower(handler, 10, 10));
 		entityManager.addEntity(new Barracks(handler, 4, 10));

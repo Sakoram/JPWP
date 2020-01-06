@@ -11,7 +11,7 @@ public class Wall extends Building {
 	public static final int DEFAULT_HEALTH = 100;
 	public Wall(Handler handler, int x, int y) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH);
-		handler.getWorld().setGridNodeEntranceLv(x, y, 3);
+		setLvUnder();
 		
 	}
 
@@ -30,16 +30,16 @@ public class Wall extends Building {
 		g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
 
-	@Override
-	public void die() {
-		super.die();
-		handler.getWorld().setGridNodeEntranceLv((int)(x/Tile.TILEWIDTH), (int)(y/Tile.TILEHEIGHT), 0);
-
-	}
 
 	@Override
 	public int getMaxHealth() {
 		return DEFAULT_HEALTH;
+	}
+
+	@Override
+	public void setLvUnder() {
+		setLvUnder(3);
+		
 	}
 
 }

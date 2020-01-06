@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import stronghold.Handler;
 import stronghold.entities.statics.buildings.Building;
+import stronghold.entities.statics.buildings.Gate;
 import stronghold.tiles.Tile;
 
 public class UIObjectSelectedBuilding extends UIObject {
@@ -32,11 +33,17 @@ public class UIObjectSelectedBuilding extends UIObject {
 
 	@Override
 	public void onClick() {
-		
 		selectedBuilding.setX(((int)((this.bounds.x+ handler.getGameCamera().getxOffset())/Tile.TILEWIDTH))*Tile.TILEWIDTH );
 		selectedBuilding.setY(((int)((this.bounds.y+ handler.getGameCamera().getyOffset())/Tile.TILEHEIGHT))*Tile.TILEHEIGHT );
+		selectedBuilding.setLvUnder();
 		handler.getWorld().getEntityManager().addEntity(selectedBuilding);
-		handler.getGame().standardGameUI.removeObject(this);
+		try {
+			selectedBuilding=(Building) selectedBuilding.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//handler.getGame().standardGameUI.removeObject(this);
 
 	}
 	@Override
@@ -48,10 +55,12 @@ public class UIObjectSelectedBuilding extends UIObject {
 	@Override
 	public void onMouseRelease(MouseEvent e){
 		if(e.getButton() == MouseEvent.BUTTON3) {
-			System.out.println("prawym myszkiem ogniem");
 			handler.getGame().standardGameUI.removeObject(this); return;
-		}	
-		super.onMouseRelease(e);
+		}
+		else if(e.getButton() == MouseEvent.BUTTON2 ) {
+			selectedBuilding.flip();
+		}
+		else super.onMouseRelease(e);
 		
 
 	}

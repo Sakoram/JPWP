@@ -53,7 +53,6 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		if(e.getButton() == MouseEvent.BUTTON1) {
 			selection = new Rectangle(pressedX,pressedY,0,0);
 			leftPressed = true;
-			//System.out.println("rect x, y: " + selection.x +", "+ selection.y +", hi " + selection.height + ", wi " + selection.width);
 		}
 		else if(e.getButton() == MouseEvent.BUTTON3)
 		{
@@ -70,11 +69,9 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(UIManager.getUIManager() != null)
-			UIManager.getUIManager().onMouseRelease(e);
+
 		if(e.getButton() == MouseEvent.BUTTON1)
 		{
-			//System.out.println("released on x, y: " + x +", "+ y );
 			leftPressed = false;
 			if(entityManager != null && selection.y< entityManager.getHandler().getHeight()-100)
 			{
@@ -92,7 +89,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 			rightPressed = false;
 			
 		
-		
+		if(UIManager.getUIManager() != null)
+			UIManager.getUIManager().onMouseRelease(e);
 		
 	}
 	
@@ -111,7 +109,6 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		selection.y = pressedY< mouseY ? pressedY : mouseY;
 		selection.height = Math.abs(mouseY - pressedY);
 		selection.width = Math.abs(mouseX - pressedX);
-		//System.out.println("rect x, y: " + selection.x +", "+ selection.y +", hi " + selection.height + ", wi " + selection.width);
 	}
 	
 	@Override

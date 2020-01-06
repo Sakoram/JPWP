@@ -14,9 +14,9 @@ public class Gate extends Building {
 	private boolean isLocked;
 	public Gate(Handler handler, int x, int y, boolean isVertical) {
 		super(handler, x, y, Tile.TILEWIDTH*3, Tile.TILEHEIGHT*3,DEFAULT_HEALTH);
-	
 		this.isVertical = isVertical;
-		unLockGate();
+		//unLockGate();
+		setLvUnder();
 	}
 
 	@Override
@@ -33,21 +33,13 @@ public class Gate extends Building {
 		
 	}
 
-	@Override
-	public void die() {
-		lockGate(0);
-		super.die();
+	{
+		
 
 	}
-	private void lockGate(int lv) {
-		isLocked=true;
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, lv);
-	}
-	private void unLockGate() {
-		lockGate(3);
-		isLocked=false;
+	@Override
+	public void setLvUnder() {
+		setLvUnder(3);
 		if(isVertical) {
 			handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+1, ((int)(y/Tile.TILEHEIGHT)), 1);
 			handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+1, ((int)(y/Tile.TILEHEIGHT))+1, 2);
@@ -60,8 +52,9 @@ public class Gate extends Building {
 		
 	}
 	public void changeState() {
-		if(isLocked) unLockGate();
-		else lockGate(3);
+		if(isLocked) setLvUnder();
+		else setLvUnder(3);
+		isLocked=!isLocked;
 	}
 	@Override
 	public boolean select(Rectangle selection) {
@@ -107,6 +100,10 @@ public class Gate extends Building {
 			
 		}
 		
+	}
+	@Override
+	public void flip() {
+		this.isVertical = !this.isVertical;
 	}
 
 }
