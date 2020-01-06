@@ -70,13 +70,12 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+		if(UIManager.getUIManager() != null)
+			UIManager.getUIManager().onMouseRelease(e);
 		if(e.getButton() == MouseEvent.BUTTON1)
 		{
 			//System.out.println("released on x, y: " + x +", "+ y );
 			leftPressed = false;
-			if(UIManager.getUIManager() != null)
-				UIManager.getUIManager().onMouseRelease(e);
 			if(entityManager != null && selection.y< entityManager.getHandler().getHeight()-100)
 			{
 				selection.height = selection.height == 0 ? 1 : selection.height;
@@ -89,8 +88,10 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 				
 		}
 			
-		else if(e.getButton() == MouseEvent.BUTTON3)
+		else if(e.getButton() == MouseEvent.BUTTON3) 
 			rightPressed = false;
+			
+		
 		
 		
 	}

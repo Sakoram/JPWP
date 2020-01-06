@@ -71,5 +71,9 @@ public class Arrow extends Entity {
 		return false;
 
 	}
+	@Override
+	public int getMaxHealth() {
+		return 0;
+	}
 
 }

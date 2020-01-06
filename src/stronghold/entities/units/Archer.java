@@ -24,7 +24,7 @@ public class Archer extends Unit {
 
 	@Override
 	public void render(Graphics g) {
-		super.render(g, Assets.bow, DEFAULT_HEALTH, isPlayers);
+		super.render(g, Assets.bow, isPlayers);
 		//if(this.isSelected) 
 		//	drawHP(g,health,DEFAULT_HEALTH,isPlayers);
 		
@@ -41,6 +41,10 @@ public class Archer extends Unit {
 	@Override
 	public void tick() {
 		super.tick(TICKS_TO_ATTACK);
+	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
 	}
 
 }

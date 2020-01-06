@@ -23,11 +23,11 @@ public class Wall extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		super.render(g, Assets.bricks1, DEFAULT_HEALTH, true);
-		//g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-		//if(this.isSelected) drawSelection(g);
-			
-		
+		render(g,x,y);
+		if(this.isSelected) drawSelection(g);
+	}
+	public void render(Graphics g,float x, float y) {
+		g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
 
 	@Override
@@ -35,6 +35,11 @@ public class Wall extends Building {
 		super.die();
 		handler.getWorld().setGridNodeEntranceLv((int)(x/Tile.TILEWIDTH), (int)(y/Tile.TILEHEIGHT), 0);
 
+	}
+
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
 	}
 
 }

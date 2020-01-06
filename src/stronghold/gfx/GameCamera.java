@@ -7,8 +7,8 @@ import stronghold.tiles.Tile;
 public class GameCamera {
 	
 	private Handler handler;
-	private double xOffset;
-	private double yOffset;
+	private float xOffset;
+	private float yOffset;
 	
 	public GameCamera(Handler handler, float xOffset, float yOffset){
 		this.handler = handler;
@@ -37,17 +37,17 @@ public class GameCamera {
 	}
 	public void adjustGameCamera() {
 		int distance;
-		distance = handler.getMouseManager().getMouseX()-50;
-		if(distance<0) move((distance)/5,0);
+		distance = handler.getMouseManager().getMouseX()-20;
+		if(distance<0) move((distance)/2,0);
 		
-		distance = handler.getMouseManager().getMouseX()-handler.getWidth()+50;
-		if(distance>0) move(distance/5,0);
+		distance = handler.getMouseManager().getMouseX()-handler.getWidth()+20;
+		if(distance>0) move(distance/2,0);
 		
-		distance = handler.getMouseManager().getMouseY()-50;
-		if(distance<0) move(0,(distance)/5);
+		distance = handler.getMouseManager().getMouseY()-20;
+		if(distance<0) move(0,(distance)/2);
 		
-		distance = handler.getMouseManager().getMouseY()-handler.getHeight()+50;
-		if(distance>0) move(0,distance/5);
+		distance = handler.getMouseManager().getMouseY()-handler.getHeight()+20;
+		if(distance>0) move(0,distance/2);
 	}
 	
 	public void move(float xAmt, float yAmt){
@@ -56,7 +56,7 @@ public class GameCamera {
 		checkBlankSpace();
 	}
 
-	public double getxOffset() {
+	public float getxOffset() {
 		return xOffset;
 	}
 
@@ -64,7 +64,7 @@ public class GameCamera {
 		this.xOffset = xOffset;
 	}
 
-	public double getyOffset() {
+	public float getyOffset() {
 		return yOffset;
 	}
 

@@ -36,10 +36,10 @@ public class UIImageButton extends UIObject {
 	public void render(Graphics g) {
 		if(hovering)
 
-					g.drawImage(image[1], (int) x, (int) y, width, height, null);
+					g.drawImage(image[1],  bounds.x,  bounds.y, bounds.width, bounds.height, null);
 		else
 
-					g.drawImage(image[0], (int) x, (int) y, width, height, null);
+					g.drawImage(image[0],  bounds.x,  bounds.y, bounds.width, bounds.height, null);
 		
 	
 	}

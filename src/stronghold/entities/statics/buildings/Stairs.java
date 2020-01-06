@@ -25,14 +25,26 @@ public class Stairs extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.bricks2, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		render(g,x,y);
 		if(this.isSelected) drawSelection(g);
 	}
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
+		for(int i=0;i<3;i++)
+				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH)),( (int)(y/Tile.TILEHEIGHT))+i, 0);
+		super.die();
 
+	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
+	}
+
+	@Override
+	public void render(Graphics g, float x, float y) {
+		g.drawImage(Assets.bricks2, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		
 	}
 
 }

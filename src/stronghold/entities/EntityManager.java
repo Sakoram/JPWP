@@ -40,7 +40,7 @@ public class EntityManager {
 		this.pathFinding = new PathFinding(handler);
 		this.king = new King(handler, spawnX,spawnY,true);
 		addEntity(king);
-		TICKS_TO_CONTROL_ENEMIES =handler.getGame().getFPS()*2;
+		TICKS_TO_CONTROL_ENEMIES =handler.getGame().getFPS()*1;
 	}
 	
 	public synchronized void tick(){

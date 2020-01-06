@@ -29,32 +29,44 @@ public abstract class UIManager {
 		objects = new ArrayList<UIObject>();
 	}
 	
-	public void tick(){
-		for(UIObject o : objects)
+	public synchronized void tick(){
+		for(int i = 0; i < objects.size(); i++)
+		{
+			UIObject o = objects.get(i);
 			o.tick();
+		}
 	}
 	
-	public void render(Graphics g){
-		for(UIObject o : objects)
+	public synchronized void render(Graphics g){
+		for(int i = 0; i < objects.size(); i++)
+		{
+			UIObject o = objects.get(i);
 			o.render(g);
+		}
+			
 	}
 	
-	public void onMouseMove(MouseEvent e){
-		
-		for(UIObject o : objects)
+	public synchronized void onMouseMove(MouseEvent e){
+		for(int i = 0; i < objects.size(); i++)
+		{
+			UIObject o = objects.get(i);
 			o.onMouseMove(e);
+		}	
 	}
 	
-	public void onMouseRelease(MouseEvent e){
-		for(UIObject o : objects)
+	public synchronized void onMouseRelease(MouseEvent e){
+		for(int i = 0; i < objects.size(); i++)
+		{
+			UIObject o = objects.get(i);
 			o.onMouseRelease(e);
+		}
 	}
 	
-	public void addObject(UIObject o){
+	public synchronized void addObject(UIObject o){
 		objects.add(o);
 	}
 	
-	public void removeObject(UIObject o){
+	public synchronized void removeObject(UIObject o){
 		objects.remove(o);
 	}
 

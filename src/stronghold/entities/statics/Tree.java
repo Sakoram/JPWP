@@ -40,5 +40,9 @@ public class Tree extends Entity {
 		return false;
 		
 	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
+	}
 
 }

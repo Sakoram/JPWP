@@ -13,7 +13,7 @@ public class GateMenuUI extends BuildingMenuUI {
 
 	public GateMenuUI(Handler handler) {
 		super(handler);
-		addObject(new UIImageButton(128*3, handler.getHeight()-80, 64, 64, Assets.bars, new ClickListener() {
+		addObject(new UIImageButton(handler.getWidth()-258, handler.getHeight()-80, 64, 64, Assets.bars, new ClickListener() {
 			@Override
 			public void onClick() {
 				if(BuildingMenuUI.building!=null)

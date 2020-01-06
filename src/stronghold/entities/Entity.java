@@ -85,17 +85,17 @@ public abstract class Entity {
 			bounds.width, bounds.height);
 	}
 	
-	public void drawHP(Graphics g, int currentHP, int maxHP, boolean isPlayer) {
+	public void drawHP(Graphics g, boolean isPlayer) {
 		if(isPlayer) g.setColor(Color.green);
 		else g.setColor(Color.red);
 		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
 				(int) (y + bounds.y - handler.getGameCamera().getyOffset())-bounds.height/16,
-				bounds.width*currentHP/maxHP, bounds.height/16);
+				bounds.width*getHealth()/getMaxHealth(), bounds.height/16);
 	}
 	
-	public void render(Graphics g, BufferedImage texture, int DEFAULT_HEALTH, boolean isPlayers) {
+	public void render(Graphics g, BufferedImage texture, boolean isPlayers) {
 		if(this.isSelected) 
-			drawHP(g,health,DEFAULT_HEALTH,isPlayers);
+			drawHP(g,isPlayers);
 		
 		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
@@ -147,6 +147,7 @@ public abstract class Entity {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public abstract int getMaxHealth();
 
 	
 }

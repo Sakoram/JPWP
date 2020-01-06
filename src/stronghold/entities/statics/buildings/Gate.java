@@ -27,34 +27,7 @@ public class Gate extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-			g.drawImage(Assets.bricks2, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH), 
-					(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT), Tile.TILEHEIGHT, Tile.TILEWIDTH, null);
-		if(isVertical) {
-			int max = 1;
-			if(isLocked) max = 0;
-			for(int i=max;i<2;i++)
-				for(int j=1;j<5;j++) {
-					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+j*Tile.TILEWIDTH/2), 
-							(int) (y - handler.getGameCamera().getyOffset()+i*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
-					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+j*Tile.TILEWIDTH/2), 
-							(int) (y - handler.getGameCamera().getyOffset()-(i+1)*Tile.TILEHEIGHT/2+Tile.TILEHEIGHT*3), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
-				}
-			
-		}
-		else {
-			int max = 1;
-			if(isLocked) max = 0;
-			for(int i=max;i<2;i++)
-				for(int j=1;j<5;j++) {
-					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH/2), 
-							(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
-					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()-(i+1)*Tile.TILEWIDTH/2+Tile.TILEWIDTH*3), 
-							(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
-				}
-			
-		}
+		render(g,x,y);
 		if(this.isSelected) drawSelection(g);
 			
 		
@@ -63,6 +36,7 @@ public class Gate extends Building {
 	@Override
 	public void die() {
 		lockGate(0);
+		super.die();
 
 	}
 	private void lockGate(int lv) {
@@ -96,6 +70,43 @@ public class Gate extends Building {
 		return true;
 	}
 	return false;
+	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
+	}
+
+	@Override
+	public void render(Graphics g, float x, float y) {
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+			g.drawImage(Assets.bricks2, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH), 
+					(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT), Tile.TILEHEIGHT, Tile.TILEWIDTH, null);
+		if(isVertical) {
+			int max = 1;
+			if(isLocked) max = 0;
+			for(int i=max;i<2;i++)
+				for(int j=1;j<5;j++) {
+					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+j*Tile.TILEWIDTH/2), 
+							(int) (y - handler.getGameCamera().getyOffset()+i*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
+					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+j*Tile.TILEWIDTH/2), 
+							(int) (y - handler.getGameCamera().getyOffset()-(i+1)*Tile.TILEHEIGHT/2+Tile.TILEHEIGHT*3), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
+				}
+			
+		}
+		else {
+			int max = 1;
+			if(isLocked) max = 0;
+			for(int i=max;i<2;i++)
+				for(int j=1;j<5;j++) {
+					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH/2), 
+							(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
+					g.drawImage(Assets.bars, (int) (x - handler.getGameCamera().getxOffset()-(i+1)*Tile.TILEWIDTH/2+Tile.TILEWIDTH*3), 
+							(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT/2), Tile.TILEHEIGHT/2, Tile.TILEWIDTH/2, null);
+				}
+			
+		}
+		
 	}
 
 }

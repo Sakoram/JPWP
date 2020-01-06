@@ -1,5 +1,6 @@
 package stronghold.entities.statics.buildings;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import stronghold.Handler;
@@ -33,6 +34,13 @@ public abstract class Building extends Entity {
 			
 		
 	}
+	@Override
+	public void die() {
+		UIManager.setUIManager(handler.getGame().standardGameUI);
+		super.die();
+	}
+	public abstract void render(Graphics g, float x, float y);
+	
 	
 
 }

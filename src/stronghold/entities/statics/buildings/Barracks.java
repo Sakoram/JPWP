@@ -30,12 +30,17 @@ public class Barracks extends Building {
 
 	@Override
 	public void render(Graphics g) {
+		render( g, x,  y);
+		if(this.isSelected) drawSelection(g);
+			
+		
+	}
+	@Override
+	public void render(Graphics g, float x, float y) {
 		for(int i=0;i<3;i++)
 			for(int j=0;j<3;j++)
 			g.drawImage(Assets.planks1, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH), 
 					(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT), Tile.TILEHEIGHT, Tile.TILEWIDTH, null);
-		if(this.isSelected) drawSelection(g);
-			
 		
 	}
 
@@ -44,6 +49,7 @@ public class Barracks extends Building {
 		for(int i=0;i<3;i++)
 			for(int j=0;j<3;j++)
 				handler.getWorld().setGridNodeEntranceLv(((int)(x/Tile.TILEWIDTH))+i,( (int)(y/Tile.TILEHEIGHT))+j, 0);
+		super.die();
 	}
 	@Override
 	public boolean select(Rectangle selection) {
@@ -53,6 +59,11 @@ public class Barracks extends Building {
 	}
 	return false;
 	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
+	}
+
 	
 
 }

@@ -23,7 +23,7 @@ public class Gimli extends Unit {
 
 	@Override
 	public void render(Graphics g) {
-		if(this.isSelected) drawHP(g,health,DEFAULT_HEALTH,isPlayers);
+		if(this.isSelected) drawHP(g,isPlayers);
 		g.drawImage(Assets.axe, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 		
 
@@ -41,6 +41,10 @@ public class Gimli extends Unit {
 	public void tick() {
 		super.tick(TICKS_TO_ATTACK);
 		
+	}
+	@Override
+	public int getMaxHealth() {
+		return DEFAULT_HEALTH;
 	}
 
 }
