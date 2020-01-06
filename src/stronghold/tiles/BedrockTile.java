@@ -8,9 +8,8 @@ public class BedrockTile extends Tile {
 		super(Assets.bedrock, id);
 	}
 
-
 	@Override
-	public boolean isSolid(){
+	public boolean isSolid() {
 		return true;
 	}
 }

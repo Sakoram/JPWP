@@ -25,21 +25,21 @@ public class Game implements Runnable {
 	private Display display;
 	private int width, height;
 	public String title;
-	
+
 	private boolean running = false;
 	private Thread thread;
-	
+
 	private BufferStrategy bs;
 	private Graphics g;
-	
-	//States
+
+	// States
 	public State gameState;
 	public State menuState;
-	
-	//Input
+
+	// Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
-	
+
 	public UIManager menuUI;
 	public UIManager gameOverUI;
 	public UIManager standardGameUI;
@@ -47,22 +47,21 @@ public class Game implements Runnable {
 	public UIManager barracksMenuUI;
 	public UIManager gateMenuUI;
 
-	
-	//Camera
+	// Camera
 	private GameCamera gameCamera;
-	
-	//Handler
+
+	// Handler
 	private Handler handler;
-	
-	public Game(String title, int width, int height){
+
+	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
 	}
-	
-	private void init(){
+
+	private void init() {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		display.getFrame().addMouseListener(mouseManager);
@@ -70,124 +69,124 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		Assets.init();
-		
+
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
-		
+
 		menuState = new MenuState(handler);
-		//gameState = new GameState(handler);
-		
-		
+		// gameState = new GameState(handler);
+
 		menuUI = new MenuUI(handler);
 		gameOverUI = new GameOverUI(handler);
 		standardGameUI = new StandardGameUI(handler);
 		buildingMenuUI = new BuildingMenuUI(handler);
 		barracksMenuUI = new BarracksMenuUI(handler);
 		gateMenuUI = new GateMenuUI(handler);
-		
+
 		State.setState(menuState);
 		UIManager.setUIManager(menuUI);
 	}
-	
-	private void tick(){
+
+	private void tick() {
 		keyManager.tick();
-		
-		if(State.getState() != null)
+
+		if (State.getState() != null)
 			State.getState().tick();
 	}
-	
-	private void render(){
+
+	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null){
+		if (bs == null) {
 			display.getCanvas().createBufferStrategy(3);
 			return;
 		}
 		g = bs.getDrawGraphics();
-		//Clear Screen
+		// Clear Screen
 		g.clearRect(0, 0, width, height);
-		//Draw Here!
-		
-		if(State.getState() != null)
+		// Draw Here!
+
+		if (State.getState() != null)
 			State.getState().render(g);
-		if(UIManager.getUIManager() != null)
+		if (UIManager.getUIManager() != null)
 			UIManager.getUIManager().render(g);
-		
-		//End Drawing!
+
+		// End Drawing!
 		bs.show();
 		g.dispose();
 	}
-	
-	public void run(){
-		
+
+	public void run() {
+
 		init();
-		
+
 		double timePerTick = 1000000000 / FPS;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int ticks = 0;
-		
-		while(running){
+
+		while (running) {
 			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick;
 			timer += now - lastTime;
 			lastTime = now;
-			
-			if(delta >= 1){
+
+			if (delta >= 1) {
 				tick();
 				render();
 				ticks++;
 				delta--;
 			}
-			
-			if(timer >= 1000000000){
+
+			if (timer >= 1000000000) {
 				System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
+
 		stop();
-		
+
 	}
-	
-	public KeyManager getKeyManager(){
+
+	public KeyManager getKeyManager() {
 		return keyManager;
 	}
-	
-	public MouseManager getMouseManager(){
+
+	public MouseManager getMouseManager() {
 		return mouseManager;
 	}
-	
-	public GameCamera getGameCamera(){
+
+	public GameCamera getGameCamera() {
 		return gameCamera;
 	}
-	
-	public int getWidth(){
+
+	public int getWidth() {
 		return width;
 	}
-	
-	public int getHeight(){
+
+	public int getHeight() {
 		return height;
 	}
+
 	public void gameOver(boolean isGameWon) {
 		State.setState(menuState);
 		UIManager.setUIManager(gameOverUI);
 		mouseManager.setEntityManager(null);
-		//stop();
+		// stop();
 	}
-	
-	public synchronized void start(){
-		if(running)
+
+	public synchronized void start() {
+		if (running)
 			return;
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 	}
-	
-	public synchronized void stop(){
-		if(!running)
+
+	public synchronized void stop() {
+		if (!running)
 			return;
 		running = false;
 		try {
@@ -196,19 +195,9 @@ public class Game implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
 	public int getFPS() {
 		return FPS;
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-

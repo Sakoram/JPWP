@@ -9,10 +9,11 @@ import stronghold.tiles.Tile;
 
 public class Wall extends Building {
 	public static final int DEFAULT_HEALTH = 100;
+
 	public Wall(Handler handler, int x, int y) {
-		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT,DEFAULT_HEALTH);
+		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT, DEFAULT_HEALTH);
 		setLvUnder();
-		
+
 	}
 
 	@Override
@@ -23,13 +24,15 @@ public class Wall extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		render(g,x,y);
-		if(this.isSelected) drawSelection(g);
-	}
-	public void render(Graphics g,float x, float y) {
-		g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		render(g, x, y);
+		if (this.isSelected)
+			drawSelection(g);
 	}
 
+	public void render(Graphics g, float x, float y) {
+		g.drawImage(Assets.bricks1, (int) (x - handler.getGameCamera().getxOffset()),
+				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+	}
 
 	@Override
 	public int getMaxHealth() {
@@ -39,7 +42,7 @@ public class Wall extends Building {
 	@Override
 	public void setLvUnder() {
 		setLvUnder(3);
-		
+
 	}
 
 }

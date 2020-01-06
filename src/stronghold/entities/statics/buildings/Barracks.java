@@ -11,8 +11,9 @@ import stronghold.ui.UIManager;
 
 public class Barracks extends Building {
 	public static final int DEFAULT_HEALTH = 500;
+
 	public Barracks(Handler handler, int x, int y) {
-		super(handler, x, y, Tile.TILEWIDTH*3, Tile.TILEHEIGHT*3,DEFAULT_HEALTH);
+		super(handler, x, y, Tile.TILEWIDTH * 3, Tile.TILEHEIGHT * 3, DEFAULT_HEALTH);
 		setLvUnder();
 	}
 
@@ -24,28 +25,31 @@ public class Barracks extends Building {
 
 	@Override
 	public void render(Graphics g) {
-		render( g, x,  y);
-		if(this.isSelected) drawSelection(g);
-			
-		
+		render(g, x, y);
+		if (this.isSelected)
+			drawSelection(g);
+
 	}
+
 	@Override
 	public void render(Graphics g, float x, float y) {
-		for(int i=0;i<3;i++)
-			for(int j=0;j<3;j++)
-			g.drawImage(Assets.planks1, (int) (x - handler.getGameCamera().getxOffset()+i*Tile.TILEWIDTH), 
-					(int) (y - handler.getGameCamera().getyOffset()+j*Tile.TILEHEIGHT), Tile.TILEHEIGHT, Tile.TILEWIDTH, null);
-		
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+				g.drawImage(Assets.planks1, (int) (x - handler.getGameCamera().getxOffset() + i * Tile.TILEWIDTH),
+						(int) (y - handler.getGameCamera().getyOffset() + j * Tile.TILEHEIGHT), Tile.TILEHEIGHT,
+						Tile.TILEWIDTH, null);
+
 	}
 
 	@Override
 	public boolean select(Rectangle selection) {
-	if(super.select(selection)) {
-		UIManager.setUIManager(handler.getGame().barracksMenuUI);
-		return true;
+		if (super.select(selection)) {
+			UIManager.setUIManager(handler.getGame().barracksMenuUI);
+			return true;
+		}
+		return false;
 	}
-	return false;
-	}
+
 	@Override
 	public int getMaxHealth() {
 		return DEFAULT_HEALTH;
@@ -55,7 +59,5 @@ public class Barracks extends Building {
 	public void setLvUnder() {
 		setLvUnder(6);
 	}
-
-	
 
 }

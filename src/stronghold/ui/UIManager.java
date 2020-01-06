@@ -10,63 +10,58 @@ import stronghold.states.State;
 
 public abstract class UIManager {
 	private static UIManager currentUIManager = null;
-	
-	public static void setUIManager(UIManager uiManager){
+
+	public static void setUIManager(UIManager uiManager) {
 		currentUIManager = uiManager;
 
 	}
-	
-	public static UIManager getUIManager(){
+
+	public static UIManager getUIManager() {
 		return currentUIManager;
 	}
-	
 
 	protected Handler handler;
 	private ArrayList<UIObject> objects;
-	
-	public UIManager(Handler handler){
+
+	public UIManager(Handler handler) {
 		this.handler = handler;
 		objects = new ArrayList<UIObject>();
 	}
-	
-	public synchronized void tick(){
-		for(int i = 0; i < objects.size(); i++)
-		{
+
+	public synchronized void tick() {
+		for (int i = 0; i < objects.size(); i++) {
 			UIObject o = objects.get(i);
 			o.tick();
 		}
 	}
-	
-	public synchronized void render(Graphics g){
-		for(int i = 0; i < objects.size(); i++)
-		{
+
+	public synchronized void render(Graphics g) {
+		for (int i = 0; i < objects.size(); i++) {
 			UIObject o = objects.get(i);
 			o.render(g);
 		}
-			
+
 	}
-	
-	public synchronized void onMouseMove(MouseEvent e){
-		for(int i = 0; i < objects.size(); i++)
-		{
+
+	public synchronized void onMouseMove(MouseEvent e) {
+		for (int i = 0; i < objects.size(); i++) {
 			UIObject o = objects.get(i);
 			o.onMouseMove(e);
-		}	
+		}
 	}
-	
-	public synchronized void onMouseRelease(MouseEvent e){
-		for(int i = 0; i < objects.size(); i++)
-		{
+
+	public synchronized void onMouseRelease(MouseEvent e) {
+		for (int i = 0; i < objects.size(); i++) {
 			UIObject o = objects.get(i);
 			o.onMouseRelease(e);
 		}
 	}
-	
-	public synchronized void addObject(UIObject o){
+
+	public synchronized void addObject(UIObject o) {
 		objects.add(o);
 	}
-	
-	public synchronized void removeObject(UIObject o){
+
+	public synchronized void removeObject(UIObject o) {
 		objects.remove(o);
 	}
 
@@ -85,5 +80,5 @@ public abstract class UIManager {
 	public void setObjects(ArrayList<UIObject> objects) {
 		this.objects = objects;
 	}
-	
+
 }

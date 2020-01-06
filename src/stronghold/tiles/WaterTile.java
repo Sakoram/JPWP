@@ -8,9 +8,8 @@ public class WaterTile extends Tile {
 		super(Assets.water, id);
 	}
 
-
 	@Override
-	public boolean isSolid(){
+	public boolean isSolid() {
 		return true;
 	}
 }

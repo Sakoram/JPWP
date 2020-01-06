@@ -18,19 +18,19 @@ public class Arrow extends Entity {
 	private static final int speed = 10;
 	private static final int areaOfDamage = Tile.TILEWIDTH;
 	private static final int DAMAGE = 100;
-	//private float rotation=0;
+	// private float rotation=0;
 	private Point target;
 	private boolean isPlayers;
 	private AffineTransformOp op;
 
 	public Arrow(Handler handler, float x, float y, float targetX, float targetY, boolean isPlayers) {
 		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT, 0);
-		this.target = new Point((int)targetX + (Tile.TILEWIDTH/2), (int)targetY + (Tile.TILEHEIGHT/2));
+		this.target = new Point((int) targetX + (Tile.TILEWIDTH / 2), (int) targetY + (Tile.TILEHEIGHT / 2));
 		this.isPlayers = isPlayers;
-		
-		Vector2d vec = new Vector2d(targetX,targetY);
-		vec.sub(new Vector2d(x,y));
-		Vector2d vec2 = new Vector2d(1,-1); // vector of arrow image
+
+		Vector2d vec = new Vector2d(targetX, targetY);
+		vec.sub(new Vector2d(x, y));
+		Vector2d vec2 = new Vector2d(1, -1); // vector of arrow image
 		double rotationRequired = Math.atan2(vec.y, vec.x) - Math.atan2(vec2.y, vec2.x);
 		double locationX = width / 4;
 		double locationY = height / 4;
@@ -40,29 +40,32 @@ public class Arrow extends Entity {
 
 	@Override
 	public void tick() {
-		//rotation += 1;
-		
-		if(moveToDest(target,speed)) die();
-		
+		// rotation += 1;
+
+		if (moveToDest(target, speed))
+			die();
 
 	}
 
 	@Override
 	public void render(Graphics g) {
 
-		Graphics2D g2d = (Graphics2D)g;
+		Graphics2D g2d = (Graphics2D) g;
 		// Drawing the rotated image at the required drawing locations
-		//g2d.drawImage(op.filter(Assets.arrow, null), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
-		g2d.drawImage(op.filter(Assets.arrow, null), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width/2, height/2, null);
+		// g2d.drawImage(op.filter(Assets.arrow, null), (int) (x -
+		// handler.getGameCamera().getxOffset()), (int) (y -
+		// handler.getGameCamera().getyOffset()), null);
+		g2d.drawImage(op.filter(Assets.arrow, null), (int) (x - handler.getGameCamera().getxOffset()),
+				(int) (y - handler.getGameCamera().getyOffset()), width / 2, height / 2, null);
 
 	}
 
 	@Override
 	public void die() {
+		handler.getWorld().getEntityManager().damageUnits(DAMAGE,
+				new Rectangle((int) x - (areaOfDamage / 2), (int) y - (areaOfDamage / 2), areaOfDamage, areaOfDamage),
+				isPlayers);
 		super.die();
-		handler.getWorld().getEntityManager().damageUnits(DAMAGE, new Rectangle((int)x-(areaOfDamage/2), (int)y-(areaOfDamage/2),
-				areaOfDamage,areaOfDamage), isPlayers);
-		
 
 	}
 
@@ -71,6 +74,7 @@ public class Arrow extends Entity {
 		return false;
 
 	}
+
 	@Override
 	public int getMaxHealth() {
 		return 0;

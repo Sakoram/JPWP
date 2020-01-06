@@ -48,7 +48,8 @@ public abstract class Unit extends Entity {
 		if (path != null) {
 			this.path = path;
 			this.pathIterator = this.path.iterator();
-			if(pathIterator.hasNext()) pathIterator.next();
+			if (pathIterator.hasNext())
+				pathIterator.next();
 		}
 
 	}
@@ -66,8 +67,7 @@ public abstract class Unit extends Entity {
 
 					atack(enemy);
 				}
-			} 
-				
+			}
 
 		} else {
 			if (pathIterator != null && pathIterator.hasNext()) {

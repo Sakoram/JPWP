@@ -42,6 +42,4 @@ public class MenuUI extends UIManager {
 		}));
 	}
 
-	
-
 }

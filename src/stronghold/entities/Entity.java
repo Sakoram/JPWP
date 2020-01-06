@@ -12,7 +12,7 @@ import stronghold.Handler;
 
 public abstract class Entity {
 
-	//public static final int DEFAULT_HEALTH = 10;
+	// public static final int DEFAULT_HEALTH = 10;
 	protected static Handler handler;
 	protected float x;
 	protected float y;
@@ -21,84 +21,89 @@ public abstract class Entity {
 	protected boolean active = true;
 	protected Rectangle bounds;
 	protected boolean isSelected = false;
-	
-	public Entity(Handler handler, float x, float y, int width, int height, int health){
+
+	public Entity(Handler handler, float x, float y, int width, int height, int health) {
 		Entity.handler = handler;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.health = health;
-		
+
 		bounds = new Rectangle(0, 0, width, height);
 	}
-	
+
 	public abstract void tick();
-	
+
 	public abstract void render(Graphics g);
-	
+
 	public void die() {
-		active=false;
+		active = false;
 	}
-	
+
 	public abstract boolean select(Rectangle selection);
-	
-	public void hurt(int amt){
+
+	public void hurt(int amt) {
 		health -= amt;
-		if(health <= 0){
+		if (health <= 0) {
 			die();
 		}
 
 	}
+
 	protected boolean moveToDest(Point dest, int speed) {
-		Vector2d temp = new Vector2d(dest.getX(),dest.getY());
-		temp.sub(new Vector2d(x,y));
-		if(temp.length() <= speed) {
+		Vector2d temp = new Vector2d(dest.getX(), dest.getY());
+		temp.sub(new Vector2d(x, y));
+		if (temp.length() <= speed) {
 			this.x = dest.x;
 			this.y = dest.y;
 			return true;
 		}
 		temp.normalize();
 		temp.scale(speed);
-		this.x+=temp.x;
-		this.y+=temp.y;
+		this.x += temp.x;
+		this.y += temp.y;
 		return false;
 	}
-	
-	public boolean checkEntityCollisions(float xOffset, float yOffset){
-		for(Entity e : handler.getWorld().getEntityManager().getEntities()){
-			if(e.equals(this))
+
+	public boolean checkEntityCollisions(float xOffset, float yOffset) {
+		for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
+			if (e.equals(this))
 				continue;
-			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
+			if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
 				return true;
 		}
 		return false;
 	}
-	
-	public Rectangle getCollisionBounds(float xOffset, float yOffset){
-		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
+
+	public Rectangle getCollisionBounds(float xOffset, float yOffset) {
+		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width,
+				bounds.height);
 	}
+
 	public void drawSelection(Graphics g) {
-		g.setColor(new Color(0,250,0,100));
-		
-		g.fillRect((int) (x   - handler.getGameCamera().getxOffset()),
-			(int) (y  - handler.getGameCamera().getyOffset()),
-			width, height);
+		g.setColor(new Color(0, 250, 0, 100));
+
+		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()),
+				width, height);
 	}
-	
+
 	public void drawHP(Graphics g, boolean isPlayer) {
-		if(isPlayer) g.setColor(Color.green);
-		else g.setColor(Color.red);
+		if (isPlayer)
+			g.setColor(Color.green);
+		else
+			g.setColor(Color.red);
 		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-				(int) (y + bounds.y - handler.getGameCamera().getyOffset())-bounds.height/16,
-				bounds.width*getHealth()/getMaxHealth(), bounds.height/16);
+				(int) (y + bounds.y - handler.getGameCamera().getyOffset()) - bounds.height / 16,
+				bounds.width * getHealth() / getMaxHealth(), bounds.height / 16);
 	}
-	
+
 	public void render(Graphics g, BufferedImage texture, boolean isPlayers) {
-		if(this.isSelected) 
-			drawHP(g,isPlayers);
-		
-		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		if (this.isSelected)
+			drawHP(g, isPlayers);
+
+		g.drawImage(texture, (int) (x - handler.getGameCamera().getxOffset()),
+				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 	}
 
 	public float getX() {
@@ -148,7 +153,7 @@ public abstract class Entity {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
 	public abstract int getMaxHealth();
 
-	
 }
