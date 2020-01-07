@@ -3,12 +3,22 @@ package stronghold.ui;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-
+/**
+ * Abstrakcyjna klasa po której dziedziczą klasy obiektów interface'u.
+ * @author a
+ *
+ */
 public abstract class UIObject {
 
 	protected Rectangle bounds;
 	protected boolean hovering = false;
-
+/**
+ * 
+ * @param x koordynat x lokalizacji na ekranie.
+ * @param y koordynat y lokalizacji na ekranie.
+ * @param width szerokość obiektu na ekranie.
+ * @param height wysokość obiektu na ekranie.
+ */
 	public UIObject(float x, float y, int width, int height) {
 
 		bounds = new Rectangle((int) x, (int) y, width, height);

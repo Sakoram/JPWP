@@ -1,13 +1,16 @@
 package stronghold.entities.units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa jednostki pracownika
+ * @author a
+ *
+ */
 public class Worker extends Unit {
 
 	public static final int DEFAULT_HEALTH = 100;

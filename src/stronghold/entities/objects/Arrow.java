@@ -13,7 +13,11 @@ import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa strzały, której obiek jest tworzony podczas ataku łucznika.
+ * @author a
+ *
+ */
 public class Arrow extends Entity {
 	private static final int speed = 10;
 	private static final int areaOfDamage = Tile.TILEWIDTH;

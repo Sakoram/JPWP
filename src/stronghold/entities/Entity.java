@@ -9,7 +9,11 @@ import java.awt.image.BufferedImage;
 import javax.vecmath.Vector2d;
 
 import stronghold.Handler;
-
+/**
+ * Najbradziej abstrakcyjna klasa istoty w grze.
+ * @author a
+ *
+ */
 public abstract class Entity {
 
 	// public static final int DEFAULT_HEALTH = 10;

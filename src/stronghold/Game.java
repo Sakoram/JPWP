@@ -6,9 +6,8 @@ import java.awt.image.BufferStrategy;
 import stronghold.display.Display;
 import stronghold.gfx.Assets;
 import stronghold.gfx.GameCamera;
-import stronghold.input.KeyManager;
+//import stronghold.input.KeyManager;
 import stronghold.input.MouseManager;
-import stronghold.states.GameState;
 import stronghold.states.MenuState;
 import stronghold.states.State;
 import stronghold.ui.BarracksMenuUI;
@@ -18,7 +17,11 @@ import stronghold.ui.GateMenuUI;
 import stronghold.ui.MenuUI;
 import stronghold.ui.StandardGameUI;
 import stronghold.ui.UIManager;
-
+/**
+ * Główna klasa programu. Tworzy okno gry.
+ * @author a
+ *
+ */
 public class Game implements Runnable {
 	private int FPS = 60;
 
@@ -37,7 +40,7 @@ public class Game implements Runnable {
 	public State menuState;
 
 	// Input
-	private KeyManager keyManager;
+	//private KeyManager keyManager;
 	private MouseManager mouseManager;
 
 	public UIManager menuUI;
@@ -52,18 +55,25 @@ public class Game implements Runnable {
 
 	// Handler
 	private Handler handler;
-
+/**
+ * Konstruktor klasy Game.
+ * @param title Tytuł wyświetlany na oknie gry.
+ * @param width Szerokość okna.
+ * @param height Wysokość okna.
+ */
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
-		keyManager = new KeyManager();
+		//keyManager = new KeyManager();
 		mouseManager = new MouseManager();
 	}
-
+/**
+ * Metoda inicjalizująca.
+ */
 	private void init() {
 		display = new Display(title, width, height);
-		display.getFrame().addKeyListener(keyManager);
+		//display.getFrame().addKeyListener(keyManager);
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
@@ -86,14 +96,18 @@ public class Game implements Runnable {
 		State.setState(menuState);
 		UIManager.setUIManager(menuUI);
 	}
-
+/**
+ * Metoda odpalana regularnie z zadaną częstotliwością. Wykonuje ona całą logike.
+ */
 	private void tick() {
-		keyManager.tick();
+		//keyManager.tick();
 
 		if (State.getState() != null)
 			State.getState().tick();
 	}
-
+/**
+ * Metoda renderująca obraz.
+ */
 	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
 		if (bs == null) {
@@ -114,7 +128,9 @@ public class Game implements Runnable {
 		bs.show();
 		g.dispose();
 	}
-
+/**
+ * Metoda zawierająca główną pętle gry.
+ */
 	public void run() {
 
 		init();
@@ -150,9 +166,9 @@ public class Game implements Runnable {
 
 	}
 
-	public KeyManager getKeyManager() {
-		return keyManager;
-	}
+//	public KeyManager getKeyManager() {
+//		return keyManager;
+//	}
 
 	public MouseManager getMouseManager() {
 		return mouseManager;
@@ -169,14 +185,20 @@ public class Game implements Runnable {
 	public int getHeight() {
 		return height;
 	}
-
+/**
+ * Metoda wykonynawa po zakończeniu rozgrywki.
+ * Jest ona wywoływana po śmierci króla, lub po przeżyciu wszystkich fal przeciwników.
+ * @param isGameWon true == gra wygrana, false == gra przegrana
+ */
 	public void gameOver(boolean isGameWon) {
 		State.setState(menuState);
 		UIManager.setUIManager(gameOverUI);
 		mouseManager.setEntityManager(null);
 		// stop();
 	}
-
+/**
+ * Metoda startująca wątek.
+ */
 	public synchronized void start() {
 		if (running)
 			return;
@@ -184,7 +206,9 @@ public class Game implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 	}
-
+/**
+ * Metoda zatrzymująca wątek.
+ */
 	public synchronized void stop() {
 		if (!running)
 			return;

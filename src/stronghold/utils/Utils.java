@@ -3,7 +3,11 @@ package stronghold.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**
+ * Klasa pomocnicza przy wczytywaniu danych z pliku.
+ * @author a
+ *
+ */
 public class Utils {
 
 	public static String loadFileAsString(String path) {

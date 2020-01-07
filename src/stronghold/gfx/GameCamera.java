@@ -3,7 +3,12 @@ package stronghold.gfx;
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa kamery. 
+ * Przechowyje ofset kamery i ma metody pozwalające je ustawiać.
+ * @author a
+ *
+ */
 public class GameCamera {
 
 	private Handler handler;

@@ -8,12 +8,16 @@ import java.awt.event.MouseMotionListener;
 
 import stronghold.entities.EntityManager;
 import stronghold.ui.UIManager;
-
+/**
+ * Klasa której obiekt nasłuchuje ruchów myszki i naciśnięć jej przycisków.
+ * Wysyła informacje o tym co się dzieje z myszką dalej.
+ * @author a
+ *
+ */
 public class MouseManager implements MouseListener, MouseMotionListener {
 
 	private boolean leftPressed, rightPressed;
 	private int mouseX, mouseY, pressedX, pressedY;
-	// private UIManager uiManager;
 	private EntityManager entityManager;
 	private Rectangle selection;
 
@@ -21,11 +25,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		;
 	}
 
-//	public void setUIManager(UIManager uiManager){
-//		this.uiManager = uiManager;
-//	}
-//	
-	// Getters
+
 
 	public boolean isLeftPressed() {
 		return leftPressed;
@@ -43,8 +43,6 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 		return mouseY;
 	}
 
-	// Implemented methods
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		pressedX = e.getX();
@@ -56,7 +54,6 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 			rightPressed = true;
 			if (entityManager != null) {
 				entityManager.MoveSelectedUnits(new Point(pressedX, pressedY));
-				// entityManager.deselectEntities();
 			}
 
 		}

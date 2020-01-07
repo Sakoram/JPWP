@@ -2,9 +2,11 @@ package stronghold.ui;
 
 import stronghold.Handler;
 import stronghold.gfx.Assets;
-import stronghold.states.GameState;
-import stronghold.states.State;
-
+/**
+ * Menu wyświetlane po zakończeniu gry.
+ * @author a
+ *
+ */
 public class GameOverUI extends UIManager {
 
 	public GameOverUI(Handler handler) {

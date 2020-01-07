@@ -5,13 +5,20 @@ import java.awt.event.MouseEvent;
 
 import stronghold.Handler;
 import stronghold.entities.statics.buildings.Building;
-import stronghold.entities.statics.buildings.Gate;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa obsługująca budowanie budynków.
+ * @author a
+ *
+ */
 public class UIObjectSelectedBuilding extends UIObject {
 	private Building selectedBuilding;
 	private Handler handler;
-
+/**
+ * Konstruktor
+ * @param handler uchwyt
+ * @param selectedBuilding Budynek do budowy wybrany z menu.
+ */
 	public UIObjectSelectedBuilding(Handler handler, Building selectedBuilding) {
 		super(handler.getWidth() + 1, 0, selectedBuilding.getWidth(), selectedBuilding.getHeight());
 		this.selectedBuilding = selectedBuilding;

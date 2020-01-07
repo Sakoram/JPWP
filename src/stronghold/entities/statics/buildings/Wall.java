@@ -1,12 +1,15 @@
 package stronghold.entities.statics.buildings;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa budynku muru.
+ * @author a
+ *
+ */
 public class Wall extends Building {
 	public static final int DEFAULT_HEALTH = 100;
 

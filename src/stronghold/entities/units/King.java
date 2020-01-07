@@ -1,13 +1,16 @@
 package stronghold.entities.units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa jednostki króla.
+ * @author a
+ *
+ */
 public class King extends Unit {
 	private static int TICKS_TO_ATTACK;
 	public static final int DEFAULT_HEALTH = 2000;

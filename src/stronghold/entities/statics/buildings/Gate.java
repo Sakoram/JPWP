@@ -7,7 +7,11 @@ import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 import stronghold.ui.UIManager;
-
+/**
+ * Klasa budnymku bramy.
+ * @author a
+ *
+ */
 public class Gate extends Building {
 	public static final int DEFAULT_HEALTH = 900;
 	private boolean isVertical;

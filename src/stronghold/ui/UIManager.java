@@ -6,8 +6,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import stronghold.Handler;
-import stronghold.states.State;
-
+/**
+ * Abstrakcyjna klasa po której dziedziczą klasy odpowiedzialne za obsługe obiektów interface'u.
+ * @author a
+ *
+ */
 public abstract class UIManager {
 	private static UIManager currentUIManager = null;
 

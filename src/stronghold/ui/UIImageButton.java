@@ -1,18 +1,26 @@
 package stronghold.ui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import stronghold.gfx.Assets;
-import stronghold.tiles.Tile;
-
+/**
+ * Klasa przycisku na ekranie.
+ * @author a
+ *
+ */
 public class UIImageButton extends UIObject {
 
 	private ClickListener clicker;
 	private BufferedImage[] image;
-
+/**
+ * Konstruktor przycisku
+ * @param x koordynat x na ekranie.
+ * @param y koordynat x na ekranie.
+ * @param width szerokość na ekranie.
+ * @param height wysokość na ekranie.
+ * @param image textura przycisku po najechaniu i standardowa.
+ * @param clicker funcja odpalana po kliknięciu przycisku.
+ */
 	public UIImageButton(int x, int y, int width, int height, BufferedImage[] image, ClickListener clicker) {
 		super(x, y, width, height);
 		this.clicker = clicker;

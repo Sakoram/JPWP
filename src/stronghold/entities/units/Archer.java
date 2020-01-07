@@ -1,6 +1,5 @@
 package stronghold.entities.units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
@@ -8,7 +7,11 @@ import stronghold.entities.Entity;
 import stronghold.entities.objects.Arrow;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa jednostki łucznika.
+ * @author a
+ *
+ */
 public class Archer extends Unit {
 	private static final int TICKS_TO_ATTACK = (int) (handler.getGame().getFPS() * 1.5);
 	public static final int RANGE = 8;
@@ -23,11 +26,6 @@ public class Archer extends Unit {
 	@Override
 	public void render(Graphics g) {
 		super.render(g, Assets.bow, isPlayers);
-		// if(this.isSelected)
-		// drawHP(g,health,DEFAULT_HEALTH,isPlayers);
-
-		// g.drawImage(Assets.bow, (int) (x - handler.getGameCamera().getxOffset()),
-		// (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
 	}
 

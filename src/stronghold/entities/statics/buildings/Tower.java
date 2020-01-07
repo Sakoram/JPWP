@@ -5,7 +5,11 @@ import java.awt.Graphics;
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa budynku schodów.
+ * @author a
+ *
+ */
 public class Tower extends Building {
 	public static final int DEFAULT_HEALTH = 900;
 

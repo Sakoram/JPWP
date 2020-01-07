@@ -1,13 +1,16 @@
 package stronghold.entities.units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa jednostki topornika.
+ * @author a
+ *
+ */
 public class Gimli extends Unit {
 	private static final int TICKS_TO_ATTACK = (int) (handler.getGame().getFPS() * 1.5);
 	public static final int DEFAULT_HEALTH = 900;

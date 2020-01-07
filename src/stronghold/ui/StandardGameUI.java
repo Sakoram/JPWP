@@ -1,19 +1,15 @@
 package stronghold.ui;
 
-import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.statics.buildings.*;
 
-import stronghold.entities.units.Archer;
-import stronghold.entities.units.Gimli;
-import stronghold.entities.units.Knight;
-import stronghold.entities.units.Spearman;
 import stronghold.gfx.Assets;
-import stronghold.states.GameState;
-import stronghold.states.State;
-import stronghold.tiles.Tile;
-
+/**
+ * Menu podczas gry. Zawiera budynki możliwe do budowy.
+ * @author a
+ *
+ */
 public class StandardGameUI extends UIManager {
 	private Building selectedBuilding = null;
 	private UIObject activeObject = null;

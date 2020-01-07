@@ -8,25 +8,31 @@ import java.util.List;
 import stronghold.Handler;
 import stronghold.entities.GridNode;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa odpowiedzialna za znajdywanie ścieżki od punktu a do punktu b.
+ * @author a
+ *
+ */
 public class PathFinding {
 
 	private final int MOVE_STRAIGHT_COST = 10;
 	private final int MOVE_DIAGONAL_COST = 14;
 
-	// public static PathFinding Instance;
 
 	private Handler handler;
 	private GridNode[][] grid;
 	private List<GridNode> openList;
-	// private List<GridNode> closedList;
 
 	public PathFinding(Handler handler) {
-		// Instance = this;
 		this.handler = handler;
 		grid = handler.getWorld().getGrid();
 	}
-
+/**
+ * Metoda znajdująca lokacje do których można wysłać jednostki.
+ * @param dest punkt do okoła którego chcemy szukać lokacji.
+ * @param amt ilość lokacji do znalezienia.
+ * @return lista lokacji.
+ */
 	public List<Point> findLocations(Point dest, int amt) {
 		openList = new ArrayList<GridNode>();
 		GridNode currentNode = grid[(int) (dest.x / Tile.TILEWIDTH)][(int) (dest.y / Tile.TILEHEIGHT)];
@@ -57,7 +63,12 @@ public class PathFinding {
 		}
 		return locations;
 	}
-
+/**
+ * Metoda znajdująca drogę z punktu a do punktu b
+ * @param startWorldPosition pozycja startowa
+ * @param endWorldPosition pozycja do której chcemy znaleźć drogę.
+ * @return lista punktów która nas doprowadzi z początku do końca.
+ */
 	public List<Point> findPath(Point startWorldPosition, Point endWorldPosition) {
 
 		List<GridNode> path = findPath((int) startWorldPosition.x / Tile.TILEWIDTH,
@@ -75,9 +86,15 @@ public class PathFinding {
 			return vectorPath;
 		}
 	}
-
-	public List<GridNode> findPath(int startX, int startY, int endX, int endY) { // @@@@@ todo kody nie są podzielone
-																					// przez wielkosc tile
+/**
+ * Metoda znajdująca drogę z punktu a do punktu b
+ * @param startX kordynat x początku drogi
+ * @param startY kordynat y początku drogi
+ * @param endX kordynat x końca drogi
+ * @param endY kordynat y końca drogi
+ * @return lista kafelków która nas doprowadzi z początku do końca.
+ */
+	public List<GridNode> findPath(int startX, int startY, int endX, int endY) { 
 		GridNode startNode = grid[startX][startY];
 		GridNode endNode = grid[endX][endY];
 
@@ -114,13 +131,10 @@ public class PathFinding {
 			}
 
 			openList.remove(currentNode);
-			// closedList.add(currentNode);
 
 			for (GridNode neighbourNode : getNeighbourList(currentNode)) {
-				// if (closedList.contains(neighbourNode)) continue;
 				if (Tile.tiles[neighbourNode.getTileId()].isSolid()
 						|| Math.abs(neighbourNode.getEntrenceLv() - currentNode.getEntrenceLv()) > 1) {
-					// closedList.add(neighbourNode);
 					continue;
 
 				}
@@ -144,7 +158,11 @@ public class PathFinding {
 		return null;
 
 	}
-
+/**
+ * Metoda tworząca liste sąsiadujących kafelków.
+ * @param currentNode kafelek początkowy
+ * @return lista sąsiadujących kafelków.
+ */
 	private List<GridNode> getNeighbourList(GridNode currentNode) {
 		List<GridNode> neighbourList = new ArrayList<GridNode>();
 
@@ -177,7 +195,11 @@ public class PathFinding {
 
 		return neighbourList;
 	}
-
+/**
+ * Metoda tworząca drogę z kafelków.
+ * @param endNode końcowy kafelek
+ * @return lista kafelków.
+ */
 	private List<GridNode> calculatePath(GridNode endNode) {
 		List<GridNode> path = new ArrayList<GridNode>();
 		path.add(endNode);
@@ -187,18 +209,25 @@ public class PathFinding {
 			currentNode = currentNode.cameFromTile;
 		}
 		Collections.reverse(path);
-		// for(GridNode node : path) { System.out.println("path: "+ node.getx()+", "+
-		// node.gety()); node.setTileId(6); }//debug
 		return path;
 	}
-
+/**
+ * Metoda obliczająca odległóść w lini prostej od jednego kafelka do drugiego 
+ * @param a kafelek 1
+ * @param b kafelek 2
+ * @return odległość
+ */
 	private int calculateDistanceCost(GridNode a, GridNode b) {
 		int xDistance = Math.abs(a.getx() - b.getx());
 		int yDistance = Math.abs(a.gety() - b.gety());
 		int remaining = Math.abs(xDistance - yDistance);
 		return MOVE_DIAGONAL_COST * Math.min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
 	}
-
+/**
+ * Metoda zwracająca kafelek z najniższym FCost.
+ * @param GridNodeList lista kafelków do przeszukania.
+ * @return kafelek z najniższym FCost
+ */
 	private GridNode getLowestFCostNode(List<GridNode> GridNodeList) {
 		GridNode lowestFCostNode = GridNodeList.get(0);
 		for (int i = 1; i < GridNodeList.size(); i++) {

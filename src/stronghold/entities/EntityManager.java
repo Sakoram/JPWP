@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import stronghold.Handler;
@@ -15,7 +13,11 @@ import stronghold.entities.units.*;
 
 import stronghold.tiles.Tile;
 import stronghold.ui.UIManager;
-
+/**
+ * Klasa obsługująca wszystkie istoty na świecie gry.
+ * @author a
+ *
+ */
 public class EntityManager {
 
 	private Handler handler;
@@ -25,12 +27,7 @@ public class EntityManager {
 	private int ticksToControlEnemies;
 	private int TICKS_TO_CONTROL_ENEMIES;
 	private King king;
-	/*
-	 * private Comparator<Entity> renderSorter = new Comparator<Entity>(){
-	 * 
-	 * @Override public int compare(Entity a, Entity b) { if(a instanceof Unit)
-	 * return 1; return -1; } };
-	 */
+
 
 	public EntityManager(Handler handler, int spawnX, int spawnY) {
 		this.handler = handler;
@@ -81,7 +78,6 @@ public class EntityManager {
 		}
 		if (ticksToControlEnemies > TICKS_TO_CONTROL_ENEMIES)
 			ticksToControlEnemies = 0;
-		// entities.sort(renderSorter);
 	}
 
 	private boolean isBuildingClose(GridNode[][] grid, int x, int y) {
@@ -201,12 +197,9 @@ public class EntityManager {
 
 	}
 
-	// public boolean toprint= true;
 	public Unit enemyInRange(Unit attacker) {
 
-		// if (toprint ==false) return null;
 		Rectangle area = new Rectangle();
-		// System.out.print("attacker x: " + attacker.getX() +"y: "+ attacker.getY() );
 		area.x = (int) (attacker.getX() - attacker.getRange());
 		area.y = (int) (attacker.getY() - attacker.getRange());
 		area.height = attacker.getHeight() + attacker.getRange() * 2;
@@ -219,10 +212,6 @@ public class EntityManager {
 				continue;
 			if (e.equals(attacker))
 				continue;
-			// System.out.print("x: "+ (e.getX()+e.getWidth()/2)+"y:
-			// "+(e.getY()+e.getHeight()/2));
-			// System.out.print("area: " + area);
-			// toprint = false;
 			if (area.contains(e.getX() + e.getWidth() / 2, e.getY() + (e.getHeight() / 2))) {
 				GridNode[][] grid = handler.getWorld().getGrid();
 				int eY = (int) ((e.getX() + e.getWidth() / 2) / Tile.TILEWIDTH);

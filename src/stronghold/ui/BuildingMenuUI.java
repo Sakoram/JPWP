@@ -6,10 +6,12 @@ import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.statics.buildings.Building;
-import stronghold.entities.units.Spearman;
 import stronghold.gfx.Assets;
-import stronghold.tiles.Tile;
-
+/**
+ * Menu wyświetlane po wybraniu budynku.
+ * @author a
+ *
+ */
 public class BuildingMenuUI extends UIManager {
 	protected static Building building = null;
 

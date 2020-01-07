@@ -1,6 +1,5 @@
 package stronghold.entities.statics;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -8,7 +7,11 @@ import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa drzewa.
+ * @author a
+ *
+ */
 public class Tree extends Entity {
 	public static final int DEFAULT_HEALTH = 50;
 

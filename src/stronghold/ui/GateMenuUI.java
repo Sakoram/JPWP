@@ -1,12 +1,13 @@
 package stronghold.ui;
 
 import stronghold.Handler;
-import stronghold.entities.statics.buildings.Building;
 import stronghold.entities.statics.buildings.Gate;
-import stronghold.entities.units.*;
 import stronghold.gfx.Assets;
-import stronghold.tiles.Tile;
-
+/**
+ * Menu wyświetlane podczas gry po bramy.
+ * @author a
+ *
+ */
 public class GateMenuUI extends BuildingMenuUI {
 
 	public GateMenuUI(Handler handler) {

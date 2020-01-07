@@ -4,7 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+/**
+ * Klasa wczytująca plik z teksturami ze ścieżki.
+ * @author a
+ *
+ */
 public class ImageLoader {
 
 	public static BufferedImage loadImage(String path) {

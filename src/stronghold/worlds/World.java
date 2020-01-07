@@ -1,7 +1,5 @@
 package stronghold.worlds;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -10,12 +8,14 @@ import stronghold.entities.EntityManager;
 import stronghold.entities.GridNode;
 
 import stronghold.entities.statics.Tree;
-import stronghold.entities.statics.buildings.*;
-import stronghold.entities.units.*;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
 import stronghold.utils.Utils;
-
+/**
+ * Klasa Świata której obiekt jest tworzony po wybraniu poziomu trudności.
+ * @author a
+ *
+ */
 public class World {
 
 	private Handler handler;
@@ -28,12 +28,18 @@ public class World {
 	private int ticksToSpawnEnemies = 0, TICKS_TO_SPAWN_ENEMIES;
 	private int difficultyLv = 1;
 	private int waveNum = 0; // first wave without enemies
-
+/**
+ *  Konstruktor klasy World
+ * @param handler "uchwyt"
+ * @param path ścieżka do pliku z mapą
+ */
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		loadWorld(path);
 	}
-
+/**
+ * Metoda inicjalizująca rzeczy które nie mogły być inicjalizowane w konstruktorze.
+ */
 	public void init() {
 
 		entityManager = new EntityManager(handler, spawnX, spawnY);
@@ -59,7 +65,9 @@ public class World {
 		entityManager.addEntity(new Tree(handler, 6, 36));
 
 	}
-
+/**
+ * Metoda sterująca całą logiką w świecie gry.
+ */
 	public void tick() {
 		handler.getGameCamera().adjustGameCamera();
 		entityManager.tick();
@@ -69,7 +77,10 @@ public class World {
 			spawnWave();
 		}
 	}
-
+/**
+ * Metoda wyświetlająca świat.
+ * @param g Obiekt klasy Graphics, który zawiera funcje render.
+ */
 	public void render(Graphics g) {
 		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
 		int xEnd = (int) Math.min(width,
@@ -91,7 +102,12 @@ public class World {
 				g.drawImage(Assets.bricks3, x, y, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT * 2, null);
 
 	}
-
+/**
+ * 
+ * @param x koordynat x pola kafelów.
+ * @param y koordynat y pola kafelów
+ * @return Obiekt kafelka zawierający odpowiednią teksture.
+ */
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.BedrockTile;
@@ -102,7 +118,10 @@ public class World {
 			return Tile.BedrockTile;
 		return t;
 	}
-
+/**
+ * Metoda wczytująca świat z pliku i zapisująca go w tablicy.
+ * @param path ścieżka do pliku.
+ */
 	private void loadWorld(String path) {
 		spawnPoints = new Point[3];
 		String file = Utils.loadFileAsString(path);
@@ -123,7 +142,9 @@ public class World {
 			}
 		}
 	}
-
+/**
+ * Metoda tworząca fale przeciwników.
+ */
 	public void spawnWave() {
 		System.out.println("spawn");
 		if (waveNum > 5)

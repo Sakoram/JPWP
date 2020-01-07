@@ -1,12 +1,15 @@
 package stronghold.entities.statics.buildings;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa budynku schodów.
+ * @author a
+ *
+ */
 public class Stairs extends Building {
 	public static final int DEFAULT_HEALTH = 200;
 	private int rotation;

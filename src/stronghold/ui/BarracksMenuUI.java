@@ -1,11 +1,14 @@
 package stronghold.ui;
 
 import stronghold.Handler;
-import stronghold.entities.statics.buildings.Building;
 import stronghold.entities.units.*;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Menu wyświetlane po wybraniu baraków.
+ * @author a
+ *
+ */
 public class BarracksMenuUI extends BuildingMenuUI {
 
 	public BarracksMenuUI(Handler handler) {

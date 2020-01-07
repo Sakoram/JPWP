@@ -6,9 +6,12 @@ import java.awt.Rectangle;
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-import stronghold.ui.BuildingMenuUI;
 import stronghold.ui.UIManager;
-
+/**
+ * Klasa budnyku baraków.
+ * @author a
+ *
+ */
 public class Barracks extends Building {
 	public static final int DEFAULT_HEALTH = 500;
 

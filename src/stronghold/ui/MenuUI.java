@@ -1,14 +1,15 @@
 package stronghold.ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.states.GameState;
 import stronghold.states.State;
-
+/**
+ * Menu wyświetlane przed rozpoczęciem gry. Można w nim wybrać poziom trudności.
+ * @author a
+ *
+ */
 public class MenuUI extends UIManager {
 
 	public MenuUI(Handler handler) {

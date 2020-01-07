@@ -1,10 +1,14 @@
 package stronghold;
 
 import stronghold.gfx.GameCamera;
-import stronghold.input.KeyManager;
+//import stronghold.input.KeyManager;
 import stronghold.input.MouseManager;
 import stronghold.worlds.World;
-
+/**
+ * Klasa pomocnicza zawierająca wzkaźniki do potrzebnych obiektów.
+ * @author a
+ *
+ */
 public class Handler {
 
 	private Game game;
@@ -18,9 +22,9 @@ public class Handler {
 		return game.getGameCamera();
 	}
 
-	public KeyManager getKeyManager() {
-		return game.getKeyManager();
-	}
+//	public KeyManager getKeyManager() {
+//		return game.getKeyManager();
+//	}
 
 	public MouseManager getMouseManager() {
 		return game.getMouseManager();

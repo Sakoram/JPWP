@@ -8,7 +8,11 @@ import stronghold.entities.Entity;
 import stronghold.tiles.Tile;
 import stronghold.ui.BuildingMenuUI;
 import stronghold.ui.UIManager;
-
+/**
+ * Abstrakcyjna klasa budynku z której dziedziczą wszystkie budynki w grze.
+ * @author a
+ *
+ */
 public abstract class Building extends Entity implements Cloneable {
 
 	public Building(Handler handler, float x, float y, int width, int height, int health) {

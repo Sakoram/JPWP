@@ -4,7 +4,11 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-
+/**
+ * Klasa okna gry.
+ * @author a
+ *
+ */
 public class Display {
 
 	private JFrame frame;

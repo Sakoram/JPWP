@@ -3,10 +3,12 @@ package stronghold.states;
 import java.awt.Graphics;
 
 import stronghold.Handler;
-import stronghold.ui.StandardGameUI;
-import stronghold.ui.UIManager;
 import stronghold.worlds.World;
-
+/**
+ * Stan gry podczas rozgrywki, po stworzeniu jego obiektu tworzony jest świat.
+ * @author a
+ *
+ */
 public class GameState extends State {
 
 	private World world;

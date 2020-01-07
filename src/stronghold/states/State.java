@@ -3,9 +3,11 @@ package stronghold.states;
 import java.awt.Graphics;
 
 import stronghold.Handler;
-import stronghold.ui.MenuUI;
-import stronghold.ui.UIManager;
-
+/**
+ * Klasa abstrakcyjna stanu gry. Zawiera w sobie statycznie zapisany aktualny stan rozgrywki.
+ * @author a
+ *
+ */
 public abstract class State {
 	protected static Handler handler;
 	private static State currentState = null;

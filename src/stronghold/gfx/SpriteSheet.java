@@ -1,7 +1,11 @@
 package stronghold.gfx;
 
 import java.awt.image.BufferedImage;
-
+/**
+ * Klasa wycinająca pojedyncze tekstury z pliku z teksturami.
+ * @author a
+ *
+ */
 public class SpriteSheet {
 
 	private BufferedImage sheet;

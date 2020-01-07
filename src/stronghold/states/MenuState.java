@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import stronghold.Handler;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-import stronghold.ui.ClickListener;
-import stronghold.ui.MenuUI;
-import stronghold.ui.UIImageButton;
-import stronghold.ui.UIManager;
-
+/**
+ * Stan gry w menu lub menu końcowym.
+ * @author a
+ *
+ */
 public class MenuState extends State {
 
 	public MenuState(Handler handler) {

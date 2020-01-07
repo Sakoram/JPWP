@@ -1,5 +1,9 @@
 package stronghold.entities;
-
+/**
+ * Klasa, której obiekty to pojedyncze pola wykorzystywanego w znajdowaniu drogi.
+ * @author a
+ *
+ */
 public class GridNode {
 	private int tileId;
 	private int x;

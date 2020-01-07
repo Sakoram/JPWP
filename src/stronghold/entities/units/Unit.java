@@ -1,20 +1,19 @@
 package stronghold.entities.units;
 
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.vecmath.Vector2d;
-import javax.vecmath.Tuple2d;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
-import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Abstrakcyjna klasa jednostki po której dziedziczą wszystkie jednostki w grze.
+ * @author a
+ *
+ */
 public abstract class Unit extends Entity {
 
 	protected int ticksToAttack;

@@ -1,13 +1,16 @@
 package stronghold.entities.units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import stronghold.Handler;
 import stronghold.entities.Entity;
 import stronghold.gfx.Assets;
 import stronghold.tiles.Tile;
-
+/**
+ * Klasa jednostki włócznika.
+ * @author a
+ *
+ */
 public class Spearman extends Unit {
 	private static final int TICKS_TO_ATTACK = handler.getGame().getFPS();
 	public static final int DEFAULT_HEALTH = 300;
